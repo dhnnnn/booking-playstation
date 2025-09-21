@@ -14,3 +14,21 @@ pindahkan ke lokasi ke 2
 cek status lagi, jika sudah hijau brarti udah benar
 
 pindahkan ke commit
+    git commit -m "ini bebas di isi apa / isi pesan apa yang sudah di ganti atau di tambahkan"
+
+cek status lagi jika muncul : 
+nothing to commit, working tree clean
+
+brarti kodemu sudah boleh di push di github
+
+push ke github
+    git push
+
+
+
+nb : sebelum mengedit atau merubah kodingan pastikan :
+         pull dari github, atau mengambil kodingan temanmu di github agar sama
+
+         git pull
+
+         setelah itu boleh mengedit dan lakukan hal yang sama
