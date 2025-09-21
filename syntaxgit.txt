@@ -1,0 +1,16 @@
+Langkah awal clone projek dari github: 
+    git clone [https://github.com/dhnnnn/booking-playstation.git]
+
+Ubah/tambahkan codingan di laptop
+
+cek status folder
+    git status
+
+jika merah brarti sudah benar ada di lokasi pertama
+
+pindahkan ke lokasi ke 2
+    git add .
+
+cek status lagi, jika sudah hijau brarti udah benar
+
+pindahkan ke commit
