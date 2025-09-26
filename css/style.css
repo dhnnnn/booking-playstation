@@ -376,40 +376,37 @@ button {
       color: #fff; }
 
 
-.auth-buttons {
-  display: flex;
-  gap: 15px;
-}
-
-.btn-auth {
-  display: inline-block;
-  padding: 10px 25px;
-  border: 2px solid #9C5DD9;
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
-  font-size: 14px;
+.btn-gaming {
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 15px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #9C5DD9, #5C2E91); /* ungu muda → ungu tua */
+  box-shadow: 0 0 15px #9C5DD9, 0 0 30px #5C2E91;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
   text-transform: uppercase;
-  text-decoration: none;
-  transition: all 0.3s ease;
 }
 
-.login-btn {
-  background: #9C5DD9;
-  color: #000;
+.btn-gaming:hover {
+  transform: scale(1.07);
+  background: linear-gradient(135deg, #F5B700, #9C5DD9); /* kuning emas → ungu muda */
+  box-shadow: 0 0 25px #F5B700, 0 0 50px #9C5DD9;
 }
 
-.register-btn {
+/* Optional: variasi tombol (Login vs Register) */
+.btn-outline {
   background: transparent;
+  border: 2px solid #9C5DD9;
   color: #9C5DD9;
+  box-shadow: 0 0 10px #9C5DD9;
 }
 
-.login-btn:hover {
-  background: #000000;
-  border-color: #9C5DD9;
-  color: #9C5DD9;
-}
-
-.register-btn:hover {
+.btn-outline:hover {
   background: #9C5DD9;
-  color: #000;
+  color: #fff;
+  box-shadow: 0 0 20px #9C5DD9, 0 0 40px #F5B700;
 }
