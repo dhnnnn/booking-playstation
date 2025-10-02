@@ -32,3 +32,6 @@ nb : sebelum mengedit atau merubah kodingan pastikan :
          git pull
 
          setelah itu boleh mengedit dan lakukan hal yang sama
+
+
+jnhujmkimmkik
