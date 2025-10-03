@@ -14,7 +14,7 @@ body {
   font-size: 15px;
   font-weight: 400;
   line-height: 1.667; 
-  background-color : #0000;
+  background-color : #000000;
 }
 /* =================================== */
 /*  Typography 
@@ -71,6 +71,18 @@ button {
   .button:focus {
     outline: 0;
     box-shadow: none; }
+
+.section-margin {
+  margin: 70px 0; }
+  @media (min-width: 1000px) {
+    .section-margin {
+      margin: 130px 0; } }
+  .section-margin--small {
+    margin: 35px 0; }
+    @media (min-width: 1000px) {
+      .section-margin--small {
+        margin: 65px 0; } }
+
 
 .header_area {
   position: absolute;
@@ -393,8 +405,8 @@ button {
 
 .btn-gaming:hover {
   transform: scale(1.07);
-  background: linear-gradient(135deg, #F5B700, #9C5DD9); /* kuning emas → ungu muda */
-  box-shadow: 0 0 25px #F5B700, 0 0 50px #9C5DD9;
+  background: linear-gradient(130deg, #F5B700, #9C5DD9); /* kuning emas → ungu muda */
+  box-shadow: 0 0 20px #F5B700, 0 0 24px #9C5DD9;
 }
 
 /* Optional: variasi tombol (Login vs Register) */
@@ -467,3 +479,76 @@ button {
     .form-select-custom select:focus {
       outline: 0;
       box-shadow: none; }
+
+/* welcome section start */
+.welcome {
+
+  padding-top: 40px;
+  overflow: hidden; }
+  .card-img-top {
+  width: 100%;
+  height: auto;
+  object-fit: cover;}
+  .welcome-images .card {
+    border-radius: 0;
+    border: 0;
+    margin: 0 10px 10px 0; }
+    @media (max-width: 991px) {
+      .welcome-images .card img {
+        width: 100%; } }
+  @media (min-width: 991px) {
+    .welcome-content {
+      padding-left: 60px; } }
+/* end section start */
+/*=================== explore section start ====================*/
+.card-explore {
+  border: 0;
+  border-radius: 10;
+  box-shadow: 0px 10px 30px 0px rgba(153, 153, 153, 0.2);
+  transition: all .4s ease; 
+  background: #1C1C1C; }
+  .card-explore .card-img {
+    border-radius: 0; }
+  .card-explore__img {
+    width: 100%;
+    position: relative; }
+    .card-explore__img::after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      clip-path: polygon(0 83%, 0% 100%, 100% 100%);
+      background: #1C1C1C;
+      width: 100%;
+      height: 190px; }
+    .card-explore__img img {
+      padding-bottom: 1px; }
+  .card-explore .card-body {
+    padding: 5px 18px 35px 40px; }
+  .card-explore__price {
+    font-size: 40px; }
+    .card-explore__price sub {
+      font-size: 18px; }
+  .card-explore__title {
+    font-size: 24px;
+    margin: 12px 0 18px 0; }
+    .card-explore__title a {
+      color: #cacaca;
+      transition: color .2s ease; }
+  .card-explore__link {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    color: #cacaca;
+    transition: color .2s ease; }
+    .card-explore__link i, .card-explore__link span {
+      padding-left: 3px;
+      transition: all .35s ease; }
+  .card-explore:hover a {
+    color: #9C5DD9; }
+  .card-explore:hover .card-explore__link i, .card-explore:hover .card-explore__link span {
+    padding-left: 10px; }
+
+/*=================== explore section end ====================*/
