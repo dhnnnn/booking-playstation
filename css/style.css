@@ -83,6 +83,11 @@ button {
       .section-margin--small {
         margin: 65px 0; } }
 
+.section-padding {
+  padding: 60px 0; }
+  @media (min-width: 1000px) {
+    .section-padding {
+      padding: 130px 0; } }
 
 .header_area {
   position: absolute;
@@ -350,7 +355,7 @@ button {
         margin-bottom: 45px; } }
   .home-banner-area {
     height: 500px;
-    background: url("../img/home/header-bg.png") center center no-repeat;
+    background: url("../img/home/header-bg.jpeg") center center no-repeat;
     background-size: cover;
     position: relative;
     z-index: 1; }
@@ -552,3 +557,35 @@ button {
     padding-left: 10px; }
 
 /*=================== explore section end ====================*/
+
+.section-intro__style {
+  margin-bottom: 14px; }
+
+/*=================== special section end ====================*/
+.card-special {
+  padding: 45px 35px;
+  border: 0;
+  border-radius: 0;
+  transition: all .4s ease;
+  background-color: #1C1C1C; 
+
+}
+  .card-special__icon {
+    font-size: 24px;
+    color: #cca772;
+    margin-right: 13px; }
+  .card-special__title {
+    margin: 0;
+    font-weight: 400;
+    transition: all .4s ease; }
+  .card-special .card-body {
+    padding: 0; }
+    .card-special .card-body p {
+      margin-bottom: 0; }
+  .card-special:hover {
+    background: #cca772;
+    color: #fff; }
+    .card-special:hover .card-special__icon, .card-special:hover .card-special__title {
+      color: #fff; }
+
+/*=================== special section start ====================*/
