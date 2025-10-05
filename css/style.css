@@ -568,8 +568,10 @@ button {
   border-radius: 0;
   transition: all .4s ease;
   background-color: #1C1C1C; 
-
 }
+  .special-img {
+    margin-bottom: 25px;
+  }
   .card-special__icon {
     font-size: 24px;
     color: #cca772;
