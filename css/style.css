@@ -558,8 +558,8 @@ button {
 
 /*=================== explore section end ====================*/
 
-.section-intro__style {
-  margin-bottom: 14px; }
+.section-intro {
+  margin-bottom: 25px; }
 
 /*=================== special section end ====================*/
 .card-special {
@@ -568,6 +568,7 @@ button {
   border-radius: 0;
   transition: all .4s ease;
   background-color: #1C1C1C; 
+  box-shadow: 0px 10px 30px 0px rgba(153, 153, 153, 0.2);
 }
   .special-img {
     margin-bottom: 25px;
