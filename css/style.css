@@ -344,6 +344,7 @@ button {
 @media (max-width: 980px){
   .btn{
     display: none;
+    
   }
 }
 
