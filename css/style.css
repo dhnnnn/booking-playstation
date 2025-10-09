@@ -334,6 +334,12 @@ button {
     .social-icons li a:hover {
       color: #F5B700; }
 
+@media (max-width: 980px){
+  .btn{
+    display: none;
+  }
+}
+
 @media (max-width: 991px) {
   /* Default: tombol hilang */
   .mobile-auth-btns {
