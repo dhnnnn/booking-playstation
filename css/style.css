@@ -334,11 +334,41 @@ button {
     .social-icons li a:hover {
       color: #F5B700; }
 
+<<<<<<< HEAD
 /*=================== section-intro start ====================*/
 .section-intro__style {
   margin-bottom: 14px; }
 
 /*=================== section-intro end ====================*/
+=======
+@media (max-width: 980px){
+  .btn{
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  /* Default: tombol hilang */
+  .mobile-auth-btns {
+    display: none;
+    justify-content: flex-start;
+    gap: 5px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  /* Saat menu navbar terbuka (Bootstrap aktif) */
+  .navbar-collapse.show ~ .mobile-auth-btns {
+    display: flex !important;
+  }
+  .mobile-auth-btns .btn-gaming {
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+  
+}
+
+>>>>>>> refs/remotes/origin/main
 
 /* home banner area */
 .home-banner {
