@@ -77,11 +77,11 @@ button {
   @media (min-width: 1000px) {
     .section-margin {
       margin: 130px 0; } }
-  .section-margin--small {
-    margin: 35px 0; }
-    @media (min-width: 1000px) {
-      .section-margin--small {
-        margin: 65px 0; } }
+    .section-margin--small {
+      margin: 35px 0; }
+      @media (min-width: 1000px) {
+        .section-margin--small {
+          margin: 0px 0; } }
 
 .section-padding {
   padding: 60px 0; }
@@ -340,6 +340,40 @@ button {
 
 /*=================== section-intro end ====================*/
 
+@media (max-width: 980px){
+  .btn{
+    display: none;
+    
+  }
+}
+
+@media (max-width: 991px) {
+  /* Default: tombol hilang */
+  .mobile-auth-btns {
+    display: none;
+    justify-content: flex-start;
+    gap: 5px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+
+  /* Saat menu navbar terbuka (Bootstrap aktif) */
+  .navbar-collapse.show ~ .mobile-auth-btns {
+    display: flex !important;
+  }
+  .mobile-auth-btns .btn-gaming {
+    padding: 10px 14px;
+    font-size: 12px;
+    box-shadow: 0 0 15px #9C5DD9, 0 0 20px #5C2E91
+  }
+  .mobile-auth-btns .btn-outline {
+    padding: 10px 14px;
+    font-size: 12px;
+    box-shadow: 0 0 15px #9C5DD9, 0 0 20px #5C2E91
+  }
+  
+}
+
 /* home banner area */
 .home-banner {
   position: relative; }
@@ -493,23 +527,32 @@ button {
 
 /* welcome section start */
 .welcome {
-
   padding-top: 40px;
-  overflow: hidden; }
-  .card-img-top {
+  overflow: hidden; 
+}
+.card-img-top {
   width: 100%;
   height: auto;
-  object-fit: cover;}
-  .welcome-images .card {
-    border-radius: 0;
-    border: 0;
-    margin: 0 10px 10px 0; }
-    @media (max-width: 991px) {
-      .welcome-images .card img {
-        width: 100%; } }
-  @media (min-width: 991px) {
-    .welcome-content {
-      padding-left: 60px; } }
+  object-fit: cover;
+}
+.welcome-images .card {
+  border-radius: 0;
+  border: 0;
+  margin: 0 10px 10px 0; 
+}
+@media (max-width: 991px) {
+  .welcome-images .card{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
+@media (min-width: 991px) {
+  .welcome-content {
+    padding-left: 60px; 
+  } 
+}
 /* end section start */
 /*=================== explore section start ====================*/
 .card-explore {
@@ -691,7 +734,7 @@ button {
   background: #0B1A2A; }
   @media (max-width: 991px) {
     .footer-area {
-      background: #222222;
+      background: #0B1A2A;
       padding: 60px 0px; } }
   @media (max-width: 991px) {
     .footer-area .single-footer-widget {
@@ -791,3 +834,6 @@ button {
           background: #cca772; }
         .footer-area .footer-bottom .footer-social a i, .footer-area .footer-bottom .footer-social a span {
           font-size: 14px; }
+
+/* ================ footer area end ================= */
+

@@ -101,6 +101,6 @@ $(function() {
   //------- Active Nice Select --------//
   $('select').niceSelect();
 
-  
-});
 
+
+});
