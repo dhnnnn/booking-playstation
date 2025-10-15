@@ -348,7 +348,8 @@ button {
   }
 }
 
-@media (max-width: 991px) {
+
+@media (max-width: 980px) {
   /* Default: tombol hilang */
   .mobile-auth-btns {
     display: none;
@@ -455,6 +456,7 @@ button {
   box-shadow: 0 0 20px #F5B700, 0 0 24px #9C5DD9;
 }
 
+
 /* Optional: variasi tombol (Login vs Register) */
 .btn-outline {
   background: transparent;
@@ -467,6 +469,11 @@ button {
   background: #9C5DD9;
   color: #fff;
   box-shadow: 0 0 20px #9C5DD9, 0 0 40px #F5B700;
+}
+
+@media(max-width: 987px){
+  .btn-gaming{
+  }
 }
 
 .form-search {
@@ -1093,3 +1100,51 @@ button {
   }
 }
 /* ================ singgel room page end =============*/
+
+/* ================ contact area ====================== */
+
+.contact-info__icon {
+  margin-right: 20px; }
+  .contact-info__icon i, .contact-info__icon span {
+    color: #cca772;
+    font-size: 20px; }
+
+.contact-info .media-body h3 {
+  font-size: 16px;
+  margin-bottom: 0; }
+  .contact-info .media-body h3 a {
+    color: #ffffff; }
+
+
+.contact-info .media-body p {
+  color: #808080; }
+@media (min-width: 600px) {
+      .contact-banner-area {
+        height: 500px; } }
+    @media (min-width: 1000px) {
+      .contact-banner-area {
+        height: 625px; } }
+    .contact-banner-area .contact-banner {
+      position: absolute;
+      top: 58%;
+      left: 50%;
+      width: 100%;
+      transform: translateX(-50%); }
+    .contact-banner-area::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(1, 2, 11, 0.7);
+      z-index: -1; }
+  .contact-banner-btn {
+    border: 2px solid #cca772;
+    padding: 10px 45px; }
+    .contact-banner-btn:hover {
+      background: #cca772;
+      color: #fff; }
+
+/* ================ end contact area ====================== */
