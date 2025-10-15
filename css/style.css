@@ -228,6 +228,7 @@ button {
       line-height: 30px; }
     .header_area.navbar_fixed .main_menu .navbar .primary-btn {
       margin-top: 15px; }
+
 @media (max-width: 991px) {
   .navbar-toggler {
     border: none;
@@ -404,7 +405,7 @@ button {
         height: 600px; } }
     @media (min-width: 1200px) {
       .home-banner-area {
-        height: 970px; } }
+        height: 870px; } }
     .home-banner-area .home-banner {
       position: absolute;
       top: 50%;
@@ -836,4 +837,259 @@ button {
           font-size: 14px; }
 
 /* ================ footer area end ================= */
+/* =============== home banner area ================= */
+.blog-banner {
+  position: relative; }
+  .blog-banner h4, .blog-banner h1, .blog-banner a {
+    text-transform: uppercase;
+    color: #fff; }
+  .blog-banner h4 {
+    font-size: 18px;
+    margin-bottom: 15px; }
+  .blog-banner h1 {
+    font-size: 37px;
+    margin-bottom: 5px; }
+    @media (min-width: 992px) {
+      .blog-banner h1 {
+        font-size: 48px; } }
+  .blog-banner-area {
+    height: 380px;
+    background: url("../img/home/header-bg.jpeg") center center no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 1; }
+    @media (min-width: 600px) {
+      .blog-banner-area {
+        height: 500px; } }
+    @media (min-width: 1000px) {
+      .blog-banner-area {
+        height: 625px; } }
+    .blog-banner-area .blog-banner {
+      position: absolute;
+      top: 58%;
+      left: 50%;
+      width: 100%;
+      transform: translateX(-50%); }
+    .blog-banner-area::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(1, 2, 11, 0.7);
+      z-index: -1; }
+  .blog-banner-btn {
+    border: 2px solid #cca772;
+    padding: 10px 45px; }
+    .blog-banner-btn:hover {
+      background: #cca772;
+      color: #fff; }
 
+/* =======blog end========= */
+
+/*=================== breadcrumb start ====================*/
+.banner-breadcrumb {
+  display: inline-block; }
+  .banner-breadcrumb .breadcrumb {
+    background: transparent;
+    padding: 0; }
+    .banner-breadcrumb .breadcrumb-item {
+      padding: .1rem; }
+      .banner-breadcrumb .breadcrumb-item a {
+        text-transform: capitalize; }
+      .banner-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+        color: #fff;
+        padding-right: .1rem; }
+      .banner-breadcrumb .breadcrumb-item.active {
+        color: #fff; }
+
+/*=================== breadcrumb end ====================*/
+
+/* ================ singgel room page ================ */
+.card-wrapper{
+  max-width: 800px;
+  margin: 0px auto;
+  position: relative;
+  z-index: 1 ;
+  padding-top: 250px;
+}
+.card-wrapper .card{
+  background-color: #000000;
+}
+.card-wrapper img{
+  width: 100%;
+  display: block;
+  margin: 1rem 0;
+}
+.img-display{
+  overflow: hidden;
+}
+.img-showcase{
+  display: flex;
+  width: 100%;
+  transition: all 0.5s ease;
+}
+.img-showcase img{
+  min-width: 100%;
+}
+.img-select{
+  display: flex;
+}
+.img-item{
+  margin: 0.3rem;
+}
+.img-item:nth-child(1),
+.img-item:nth-child(2),
+.img-item:nth-child(3){
+  margin-right: 0;
+}
+.img-item:hover{
+  opacity: 0.8;
+}
+.product-content{
+  padding: 2rem 1rem;
+}
+.product-title{
+    font-size: 3rem;
+    text-transform: capitalize;
+    font-weight: 700;
+    position: relative;
+    color: #d7afff;
+    margin: 1rem 0;
+}
+.product-title::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 80px;
+    background: #d7afff;
+}
+.product-link{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    background: #256eff;
+    color: #fff;
+    padding: 0 0.3rem;
+    transition: all 0.5s ease;
+}
+.product-link:hover{
+    opacity: 0.9;
+}
+.product-rating{
+    color: #ffc107;
+}
+.product-rating span{
+    font-weight: 600;
+    color: #7a7a7a;
+}
+.product-price{
+    margin: 1rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+}
+.product-price span{
+    font-weight: 400;
+}
+
+.product-detail p{
+    font-size: 0.9rem;
+    padding: 0.3rem;
+    opacity: 0.8;
+}
+.product-detail ul{
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+.product-detail ul li{
+    margin: 0;
+    list-style: none;
+    background: url(../img/component/checked.png) left center no-repeat;
+    background-size: 18px;
+    padding-left: 1.7rem;
+    margin: 0.4rem 0;
+    font-weight: 600;
+    opacity: 0.9;
+}
+.product-detail ul li span{
+    font-weight: 400;
+}
+.purchase-info{
+    margin: 1.5rem 0;
+}
+.purchase-info input,
+.purchase-info .btn{
+    border: 1.5px solid #ddd;
+    border-radius: 25px;
+    text-align: center;
+    padding: 0.45rem 0.8rem;
+    outline: 0;
+    margin-right: 0.2rem;
+    margin-bottom: 1rem;
+}
+.purchase-info input{
+    width: 60px;
+}
+.purchase-info .btn{
+    cursor: pointer;
+    color: #fff;
+}
+
+.purchase-info .btn:hover{
+    opacity: 0.9;
+}
+.social-links{
+    display: flex;
+    align-items: center;
+}
+.social-links a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #000;
+    border: 1px solid #000;
+    margin: 0 0.2rem;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.5s ease;
+}
+.social-links a:hover{
+    background: #000;
+    border-color: transparent;
+    color: #fff;
+}
+
+@media (max-width: 991px) {
+  .card-wrapper {
+    padding-top: 160px;
+  }
+}
+
+@media screen and (min-width: 992px){
+  .card-wrapper{
+    margin: 0px 250px;
+  }
+  .card-wrapper .card{
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    grid-gap: 1.5rem;
+  }
+  .product-imgs{
+    display: flex;
+    flex-direction: column;
+  }
+  .product-content{
+    padding-top: 0;
+  }
+}
+/* ================ singgel room page end =============*/
