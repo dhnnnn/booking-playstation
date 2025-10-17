@@ -397,7 +397,7 @@ button {
         margin-bottom: 45px; } }
   .home-banner-area {
     height: 500px;
-    background: url("../img/home/header-bg.jpeg") center center no-repeat;
+    background: url("../img/home/header-bg.png") center center no-repeat;
     background-size: cover;
     position: relative;
     z-index: 1; }
@@ -861,7 +861,7 @@ button {
         font-size: 48px; } }
   .blog-banner-area {
     height: 380px;
-    background: url("../img/home/header-bg.jpeg") center center no-repeat;
+    background: url("../img/home/header-bg.png") center center no-repeat;
     background-size: cover;
     position: relative;
     z-index: 1; }
