@@ -95,6 +95,7 @@ class AdminController extends Controller
             }
         }
 
+        notify()->success('Room berhasil ditambahkan!');
         return redirect('/rooms');
     }
 
@@ -108,6 +109,8 @@ class AdminController extends Controller
     {
         $data = Room::find($id);
         $data->delete();
+
+        notify()->success('Room berhasil di hapus!');
         return redirect()->back();
     }
 
@@ -152,7 +155,7 @@ class AdminController extends Controller
                 $image->save();
             }
         }
-
+        notify()->success('Room berhasil diupdate!');
         return redirect('/rooms');
     }
 }

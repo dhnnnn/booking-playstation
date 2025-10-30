@@ -1,3 +1,5 @@
+@notifyJs
+
 <script>
     const selectedTags = document.getElementById("selected-tags");
     const dropdown = document.getElementById("dropdown");

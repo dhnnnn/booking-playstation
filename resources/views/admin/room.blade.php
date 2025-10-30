@@ -4,6 +4,7 @@
     @include('admin.css')
 </head>
 <body>
+    
     <div class="container">
         <header>
             <div class="logo">
@@ -73,6 +74,10 @@
                 </section>
         </main>
     </div>
+    
+    <x-notify::notify />
+    @notifyJs
+
     <script>
         document.querySelectorAll('.toggle-wrapper input[type="checkbox"]').forEach(toggle => {
             toggle.addEventListener('change', function () {
