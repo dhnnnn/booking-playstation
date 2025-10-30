@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @include('admin.css')
+</head>
+<body>
+    <div class="container">
+        <header>
+            @include('admin.header')
+        </header>
+
+        <main>
+            <div class="dashboard-header">
+                <h2>DASHBOARD</h2>
+            </div>
+            
+            <section class="stats-grid">
+                <div class="card card-yellow">
+                    <i class="fa-solid fa-ticket"></i>
+                    <div class="card-content">
+                        <p>TOTAL BOOKINGS</p>
+                        <h3>350</h3>
+                    </div>
+                </div>
+                <div class="card card-yellow">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <div class="card-content">
+                        <p>ACTIVE SESSIONS</p>
+                        <h3>12</h3>
+                    </div>
+                </div>
+                <div class="card card-yellow">
+                    <i class="fa-solid fa-chair"></i>
+                    <div class="card-content">
+                        <p>AVAILABLE</p>
+                        <h3>12</h3>
+                    </div>
+                </div>
+                <div class="card card-dark-purple">
+                    <i class="fa-solid fa-calendar-day"></i>
+                    <div class="card-content">
+                        <p>TODAY'S BOOKING</p>
+                        <h3>8</h3>
+                    </div>
+                </div>
+                <div class="card card-dark-purple">
+                    <i class="fa-solid fa-sack-dollar"></i>
+                    <div class="card-content">
+                        <p>REVENUE</p>
+                        <h3>Rp5,000,000</h3>
+                    </div>
+                </div>
+            </section>
+
+            <div class="main-content-grid">
+                <section class="widget recent-bookings">
+                    <h3 class="widget-title">RECENT BOOKINGS</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>BOOKING ID</th>
+                                <th>NAME</th>
+                                <th>ROOM</th>
+                                <th>START</th>
+                                <th>STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#MD1234</td>
+                                <td>Budi Santoso</td>
+                                <td>Regular 1</td>
+                                <td>19:00</td>
+                                <td><span class="status completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>#MD1233</td>
+                                <td>Ahmad Fauzi</td>
+                                <td>VIP 1</td>
+                                <td>20:00</td>
+                                <td><span class="status active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>#MD1232</td>
+                                <td>Dewi Lestari</td>
+                                <td>Regular 3</td>
+                                <td>20:30</td>
+                                <td><span class="status pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>#MD1231</td>
+                                <td>Eko Prasetyo</td>
+                                <td>Regular 2</td>
+                                <td>18:00</td>
+                                <td><span class="status completed">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                     <button class="view-all-btn">VIEW ALL <i class="fa-solid fa-arrow-right"></i></button>
+                </section>
+
+                <section class="widget room-availability">
+                    <h3 class="widget-title">ROOM AVAILABILITY</h3>
+                    <div class="room-grid">
+                        <div class="room-item used"><p>REG 1</p></div>
+                        <div class="room-item available"><p>REG 2</p></div>
+                        <div class="room-item used"><p>REG 3</p></div>
+                        <div class="room-item used"><p>REG 4</p></div>
+                        <div class="room-item vip used"><p>VIP 1</p></div>
+                        <div class="room-item available"><p>REG 5</p></div>
+                        <div class="room-item available"><p>REG 6</p></div>
+                        <div class="room-item used"><p>REG 7</p></div>
+                        <div class="room-item available"><p>REG 8</p></div>
+                        <div class="room-item used"><p>MGR 1</p></div>
+                        <div class="room-item used"><p>MGR 2</p></div>
+                        <div class="room-item vip available"><p>VIP 2</p></div>
+                    </div>
+                </section>
+
+                <section class="widget actions-widget">
+                     <div class="action-buttons">
+                        <button class="action-btn">CREATE NEW BOOKING</button>
+                        <button class="action-btn">MANAGE ROOMS</button>
+                        <button class="action-btn">GENERATE REPORT</button>
+                    </div>
+                    <div class="image-logo">
+                        <img src="" alt="MD Gaming Place Interior">
+                        <div class="overlay">
+                            <h4>COME & PLAY</h4>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
