@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  @notifyCss
   @include('auth.css')
 </head>
 <body>
-    
+
 
     @session('status')
         <div class="mb-4 font-medium text-sm text-green-600">
@@ -32,5 +33,7 @@
   </div>
 
   @include('auth.script')
+  @notifyJs
+  <x-notify::notify />
 </body>
 </html>

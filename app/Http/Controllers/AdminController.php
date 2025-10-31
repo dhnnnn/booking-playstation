@@ -12,6 +12,8 @@ use App\Models\Room;
 
 use App\Models\Fasilitas;
 
+use App\Models\Addons;
+
 
 
 class AdminController extends Controller
@@ -47,12 +49,12 @@ class AdminController extends Controller
 
     public function room()
     {
-        return view('admin.room');
+        return view('admin.rooms.index');
     }
 
     public function create_room()
     {
-        return view('admin.create');
+        return view('admin.rooms.create');
     }
 
     public function add_room(Request $request)
@@ -86,7 +88,7 @@ class AdminController extends Controller
         if ($request->hasFile('photo')) {
             foreach ($request->file('photo') as $file) {
                 $imageName = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('images'), $imageName);
+                $file->move(public_path('images/rooms'), $imageName);
 
                 $image = new \App\Models\Image();
                 $image->image = $imageName;
@@ -102,7 +104,7 @@ class AdminController extends Controller
     public function rooms()
     {
         $data = Room::all();
-        return view('admin.room', compact('data'));
+        return view('admin.rooms.index', compact('data'));
     }
 
     public function room_delete($id)
@@ -119,7 +121,7 @@ class AdminController extends Controller
         $data = Room::with('fasilitas')->find($id);
         $fasilitasList = Fasilitas::all();
 
-        return view('admin.update', compact('data', 'fasilitasList'));
+        return view('admin.rooms.update', compact('data', 'fasilitasList'));
     }
 
     public function edit_room(Request $request, $id)
@@ -147,7 +149,8 @@ class AdminController extends Controller
 
             foreach ($request->file('photo') as $file) {
                 $imageName = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('images'), $imageName);
+                $path = 'images/rooms';
+                $file->move(public_path('images/rooms'), $imageName);
 
                 $image = new \App\Models\Image();
                 $image->image = $imageName;
@@ -157,5 +160,62 @@ class AdminController extends Controller
         }
         notify()->success('Room berhasil diupdate!');
         return redirect('/rooms');
+    }
+
+    public function add_ons()
+    {
+        $addons = Addons::all();
+        return view('admin.addons.index', compact('addons'));
+    }
+
+    public function create_addons()
+    {
+        return view('admin.addons.create');
+    }
+
+    public function add_addons(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'nama-barang' => 'required|string|max:255',
+            'deskripsi-barang' => 'required|string',
+            'harga' => 'required|numeric',
+            'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $addons = new Addons();
+
+        $addons->addons_title = $request->input('nama-barang');
+        $addons->description = $request->input('deskripsi-barang');
+        $addons->price = $request->input('harga');
+
+        // Handle images
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo')[0]; // Assuming only one image for addons
+            $imageName = time() . '_' . $file->getClientOriginalName();
+            $path = 'images/addons';
+            $file->move(public_path('images/addons'), $imageName);
+            $addons->image = $imageName;
+        }
+
+        $addons->save();
+
+        notify()->success('Add-ons berhasil ditambahkan!');
+        return redirect('/addons');
+    }
+
+    public function delete_addons($id)
+    {
+        $addons = Addons::find($id);
+        $addons->delete();
+
+        notify()->success('Add-ons berhasil di hapus!');
+        return redirect()->back();
+    }
+
+    public function addons_update($id)
+    {
+        $addons = Addons::find($id);
+        return view('admin.addons.update', compact('addons'));
     }
 }

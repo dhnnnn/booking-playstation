@@ -6,7 +6,7 @@
 <body>
     <div class="container">
         <header>
-            @include('admin.header_room')
+            @include('admin.rooms.header')
         </header>
 
 
