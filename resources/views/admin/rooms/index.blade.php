@@ -21,10 +21,10 @@
                             <tr>
                                 <th>Room ID</th>
                                 <th>Gambar</th>
-                                <th>Nama ROOM</th>
+                                <th>Nama Room</th>
                                 <th>Type Room</th>
                                 <th>Harga</th>
-                                <th>Actions</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,6 +57,7 @@
     
     <x-notify::notify />
     @notifyJs
+
 
 </body>
 </html>

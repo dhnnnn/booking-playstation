@@ -30,7 +30,7 @@
                         <input type="file" id="photo" name="photo[]" multiple required>
 
 
-                        <button type="submit" class="submit-btn">Tambah Barang</button>
+                        <button type="submit" class="submit-btn">Update Barang</button>
                     </form>
             </section>
         </main>

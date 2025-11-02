@@ -24,7 +24,7 @@
                                 <th>Nama Barang</th>
                                 <th>Deskripsi</th>
                                 <th>Harga</th>
-                                <th>Actions</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>

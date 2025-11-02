@@ -59,7 +59,9 @@ h2 {
 a {
   display: inline-block; 
   text-decoration: none}
-
+p{
+  color: #dfdada;
+}
 
 button {
   cursor: pointer; }
@@ -583,6 +585,7 @@ button {
   transition: all .4s ease; 
   background: #1C1C1C; }
   .card-explore .card-img {
+    aspect-ratio: 1 / 1;
     border-radius: 0; }
   .card-explore__img {
     width: 100%;
@@ -933,7 +936,7 @@ button {
   margin: 0px auto;
   position: relative;
   z-index: 1 ;
-  padding-top: 250px;
+  padding-top: 60px;
 }
 .card-wrapper .card{
   background-color: #000000;
@@ -944,18 +947,27 @@ button {
   margin: 1rem 0;
 }
 .img-display{
+  width: 100%;
+  aspect-ratio: 1 / 1; /* gambar utama square */
   overflow: hidden;
+  border-radius: 10px;
 }
 .img-showcase{
   display: flex;
   width: 100%;
+  height: 100%;
   transition: all 0.5s ease;
 }
 .img-showcase img{
-  min-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .img-select{
   display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
 }
 .img-item{
   margin: 0.3rem;
@@ -965,9 +977,17 @@ button {
 .img-item:nth-child(3){
   margin-right: 0;
 }
+.img-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 .img-item:hover{
   opacity: 0.8;
 }
+
 .product-content{
   padding: 2rem 1rem;
 }
@@ -988,31 +1008,10 @@ button {
     width: 80px;
     background: #d7afff;
 }
-.product-link{
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 0.9rem;
-    display: inline-block;
-    margin-bottom: 0.5rem;
-    background: #256eff;
-    color: #fff;
-    padding: 0 0.3rem;
-    transition: all 0.5s ease;
-}
-.product-link:hover{
-    opacity: 0.9;
-}
-.product-rating{
-    color: #ffc107;
-}
-.product-rating span{
-    font-weight: 600;
-    color: #7a7a7a;
-}
+
 .product-price{
     margin: 1rem 0;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 700;
 }
 .product-price span{
@@ -1029,13 +1028,14 @@ button {
     font-size: 0.9rem;
 }
 .product-detail ul li{
+    color: #dfdada;
     margin: 0;
     list-style: none;
     background: url(../img/component/checked.png) left center no-repeat;
     background-size: 18px;
     padding-left: 1.7rem;
     margin: 0.4rem 0;
-    font-weight: 600;
+    font-weight: 300;
     opacity: 0.9;
 }
 .product-detail ul li span{
@@ -1161,3 +1161,10 @@ button {
       color: #fff; }
 
 /* ================ end contact area ====================== */
+.navbar-breadcrumb{
+  max-width: 950px;
+  margin: 0px auto;
+  position: relative;
+  z-index: 1 ;
+  padding-top: 200px;
+}

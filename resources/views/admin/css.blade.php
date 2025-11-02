@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - MD Gaming Playstation</title>
-    <link rel="icon" href="public/img/favicon.png" type="image/png">
+    <link rel="icon" href="{{ asset('img/favicon.png')}}" type="image/png">
     <link rel="stylesheet" href="admin/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,7 +10,9 @@
 
 @notifyCss
 
+
 <style>
+  @import "cropperjs/dist/cropper.css";
     /* CSS Variables untuk Palet Warna */
 :root {
     --bg-dark: #1A1A2E;

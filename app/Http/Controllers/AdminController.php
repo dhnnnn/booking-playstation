@@ -44,7 +44,9 @@ class AdminController extends Controller
 
     public function home()
     {
-        return view('home.index');
+        $room = Room::all();
+
+        return view('home.index', compact('room'));
     }
 
     public function room()
@@ -218,4 +220,28 @@ class AdminController extends Controller
         $addons = Addons::find($id);
         return view('admin.addons.update', compact('addons'));
     }
+
+    public function edit_addons(Request $request, $id)
+    {
+        $addons = Addons::find($id);
+
+        $addons->addons_title = $request->input('nama-barang');
+        $addons->description = $request->input('deskripsi-barang');
+        $addons->price = $request->input('harga');
+
+        // Handle images
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo')[0]; // Assuming only one image for addons
+            $imageName = time() . '_' . $file->getClientOriginalName();
+            $path = 'images/addons';
+            $file->move(public_path('images/addons'), $imageName);
+            $addons->image = $imageName;
+        }
+
+        $addons->save();
+
+        notify()->success('Add-ons berhasil diupdate!');
+        return redirect('/addons');
+    }
+
 }

@@ -7,7 +7,6 @@
                     <li><a href="#">Booking</a></li>
                     <li><a href="{{url('/rooms')}}" class="active">Rooms</a></li>
                     <li><a href="{{url('/addons')}}" class="">Add ons</a></li>
-                    <li><a href="{{url('/users')}}">Users</a></li>
                 </ul>
             </nav>
             <div class="user-actions">

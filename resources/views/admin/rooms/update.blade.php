@@ -18,7 +18,7 @@
                             <label for="room-name">Nama Room:</label>
                             <input type="text" id="room-name" name="room-name" value="{{$data->room_title}}" required>
 
-                            <label for="room-description">Descripsi Room:</label>
+                            <label for="room-description">Deskripsi Room:</label>
                             <textarea id="room-description" name="room-description" value="{{$data->description}}" required>{{$data->description}}</textarea>
 
                             <label for="room-type">Type Room:</label>

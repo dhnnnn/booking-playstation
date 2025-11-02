@@ -6,7 +6,7 @@
 <body>
     <div class="container">
         <header>
-            @include('admin.addons.header)
+            @include('admin.addons.header')
         </header>
 
 
