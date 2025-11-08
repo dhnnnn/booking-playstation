@@ -32,6 +32,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/room/booking', [SroomController::class, 'booking']);
+});
 
 Route::get('/room/detail/{id}', [SroomController::class, 'detail_room']);
 

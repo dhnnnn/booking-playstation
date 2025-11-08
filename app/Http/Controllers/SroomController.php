@@ -22,4 +22,9 @@ class SroomController extends Controller
 
         return view('sroom.index', compact('room', 'fasilitasList'));
     }
+
+    public function booking()
+    {
+        return view('booking.index');
+    }
 }

@@ -8,6 +8,8 @@
 /* =================================== */
 /*  Basic Style 
 /* =================================== */
+
+
 body {
   color: #777777;
   font-family: "Roboto", sans-serif;
@@ -1168,3 +1170,7 @@ button {
   z-index: 1 ;
   padding-top: 200px;
 }
+
+
+/* ======== booking area ========== */
+

@@ -33,6 +33,9 @@
                         <label for="price">Harga:</label>
                         <input type="number" id="price" name="price" required>
 
+                        <label for="total_units">Total room:</label>
+                        <input type="number" id="total_units" name="total_units" required>
+
 
                         <div class="multi-select-container">
                             <label for="fasilitas"><strong>Fasilitas</strong></label>

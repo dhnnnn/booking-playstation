@@ -32,6 +32,9 @@
                             <label for="price">Harga:</label>
                             <input type="number" id="price" name="price" value="{{$data->price}}" required>
 
+                            <label for="total_units">Total room:</label>
+                            <input type="number" id="total_units" name="total_units" value="{{$data->total_units}}" required>
+
 
                             <div class="multi-select-container">
                                 <label for="fasilitas"><strong>Fasilitas</strong></label>
@@ -57,16 +60,16 @@
                             <input type="hidden" name="fasilitas" id="fasilitas-input">
 
                             <label for="photo">Foto Room 1:</label>
-                            <input type="file" id="photo" name="photo[]" multiple required>
+                            <input type="file" id="photo" name="photo[]" multiple>
 
                             <label for="photo">Foto Room 2:</label>
-                            <input type="file" id="photo" name="photo[]" multiple required>
+                            <input type="file" id="photo" name="photo[]" multiple>
 
                             <label for="photo">Foto Room 3:</label>
-                            <input type="file" id="photo" name="photo[]" multiple required>
+                            <input type="file" id="photo" name="photo[]" multiple>
 
                             <label for="photo">Foto Room 4:</label>
-                            <input type="file" id="photo" name="photo[]" multiple required>
+                            <input type="file" id="photo" name="photo[]" multiple>
 
                             <button type="submit" class="submit-btn">Update Room</button>
                     </form>

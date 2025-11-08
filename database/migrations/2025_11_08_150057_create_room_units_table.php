@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rooms', function (Blueprint $table) {
+        Schema::create('room_units', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('room_title') -> nullable();
-            $table->longText('description') -> nullable();
-            $table->string('price') -> nullable();
-            $table->string('room_type') -> nullable();
-            $table->integer('total_units')->default(1);
+            $table->string('room_id'); // foreign key ke rooms
+            $table->string('unit_name'); // contoh: REG 1, REG 2, VIP 1
+            $table->enum('status', ['tersedia', 'tidak tersedia'])->default('tersedia');
             $table->timestamps();
+
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rooms');
+        Schema::dropIfExists('room_units');
     }
 };

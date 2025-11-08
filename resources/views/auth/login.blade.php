@@ -17,7 +17,7 @@
   <!-- Login Form -->
   <div class="container" id="loginForm">
     <a href="{{url('/')}}"><img src="img/Logo.png" alt="" class="mb-4"></a>
-    <x-validation-errors class="mb-4" />
+    <!-- <x-validation-errors class="mb-4" /> -->
     <form class="text-center" method="POST" action="{{ route('login') }}">
         @csrf
       <div class="mb-3">

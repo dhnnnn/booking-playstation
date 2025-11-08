@@ -77,13 +77,16 @@ class AdminController extends Controller
         $data->description = $request->input('room-description');
         $data->price = $request->input('price');
         $data->room_type = $request->input('room-type');
+        $data->total_units = $request->input('total_units');
 
         $data->save();
 
         // Handle fasilitas
         if ($request->input('fasilitas')) {
-            $fasilitasIds = explode(',', $request->input('fasilitas'));
-            $data->fasilitas()->attach($fasilitasIds);
+            $fasilitasIds = array_filter(explode(',', $request->input('fasilitas')));
+            if (!empty($fasilitasIds)) {
+                $data->fasilitas()->attach($fasilitasIds);
+            }
         }
 
         // Handle images
@@ -139,8 +142,12 @@ class AdminController extends Controller
 
         // Update fasilitas
         if ($request->input('fasilitas')) {
-            $fasilitasIds = explode(',', $request->input('fasilitas'));
-            $data->fasilitas()->sync($fasilitasIds);
+            $fasilitasIds = array_filter(explode(',', $request->input('fasilitas')));
+            if (!empty($fasilitasIds)) {
+                $data->fasilitas()->sync($fasilitasIds);
+            } else {
+                $data->fasilitas()->detach();
+            }
         } else {
             $data->fasilitas()->detach();
         }

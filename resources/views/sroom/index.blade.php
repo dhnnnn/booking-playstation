@@ -15,11 +15,11 @@
     <main class="site-main">
       <!-- ================ start detail room area ================= -->
        <section class="navbar-breadcrumb">
-        <nav style="--bs-breadcrumb-divider: '/';" aria-label="breadcrumb">
+        <nav style="--bs-breadcrumb-divider: '/';" class="navbar" aria-label="breadcrumb" style="color: #ffffff">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-            <li class="breadcrumb-item"><a href="{{url('/room')}}">Room</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Detail room</li>
+            <li class="breadcrumb-item"><a style="color: #ffffff;" href="{{url('/')}}">Home</a></li>
+            <li class="breadcrumb-item"><a style="color: #ffffff;" href="{{url('/room')}}">Room</a></li>
+            <li class="breadcrumb-item active" aria-current="page" style="color: #ffffff;">Detail room</li>
           </ol>
         </nav>
        </section>
@@ -69,7 +69,7 @@
                   </div>
 
                   <div class = "purchase-info">  
-                    <button type = "button" class = "btn-gaming">Book Now</button>
+                    <a href="{{ url('/room/booking') }}" class="btn-gaming">Book Now</a>
                   </div>
                 </div>
           </div>
