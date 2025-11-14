@@ -87,25 +87,7 @@
             border-radius: 2px;
         }
 
-        .legend-available {
-            background: rgb(var(--color-available));
-            box-shadow: 0 0 8px rgba(var(--color-available), 0.5);
-        }
-
-        .legend-occupied {
-            background: rgb(var(--color-occupied));
-            box-shadow: 0 0 8px rgba(var(--color-occupied), 0.5);
-        }
-
-        .legend-vip {
-            background: rgb(var(--color-vip));
-            box-shadow: 0 0 8px rgba(var(--color-vip), 0.5);
-        }
-
-        .legend-manager {
-            background: rgb(var(--color-manager));
-            box-shadow: 0 0 8px rgba(var(--color-manager), 0.3);
-        }
+ 
 
         /* Rooms Grid */
         .rooms-grid {
@@ -161,28 +143,6 @@
             opacity: 0.6;
         }
 
-        .room-card.vip {
-            border-color: rgb(var(--color-vip));
-        }
-
-        .room-card.vip::before {
-            background: rgb(var(--color-purple-glow));
-            box-shadow: var(--shadow-purple-glow);
-        }
-
-        .room-card.vip:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 25px rgba(var(--color-vip), 0.3);
-        }
-
-        .room-card.vip:hover::before {
-            opacity: 1;
-        }
-
-        .room-card.manager {
-            border-color: rgb(var(--color-manager));
-        }
-
         .room-card.selected {
             transform: scale(1.02);
             box-shadow: 0 0 30px rgba(var(--color-cyan-glow), 0.5);
@@ -234,7 +194,7 @@
         }
 
         .room-card.vip .room-name {
-            color: rgb(var(--color-vip));
+            /* color: rgb(var(--color-vip)); */
         }
 
         .room-card.manager .room-name {
@@ -500,14 +460,37 @@
             border-top: 1px solid gray;
         }
 
+        .summary-dp-total{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(var(--color-cyan), 0.05);
+            border: 1px solid rgba(var(--color-cyan), 0.2);
+        }
+
         .total-label {
             font-size: 0.875rem;
             color: rgb(148 163 184);
             font-weight: 500;
         }
 
+        .dp-label{
+            font-size: 0.875rem;
+            color: rgb(148 163 184);
+            font-weight: 500; 
+        }
+
         .total-amount {
-            font-size: 1.875rem;
+            font-size: 18px;
+            font-weight: 700;
+            /* color: rgb(var(--color-cyan)); */
+            /* text-shadow: 0 0 10px rgba(var(--color-cyan), 0.3); */
+            text-decoration: line-through;
+        }
+
+        .total-dp-amount{
+            font-size: 23px;
             font-weight: 700;
             color: rgb(var(--color-cyan));
             text-shadow: 0 0 10px rgba(var(--color-cyan), 0.3);

@@ -94,6 +94,7 @@
     function updateOrderSummary() {
         const selectedRoomElement = document.getElementById('selectedRoom');
         const totalAmountElement = document.getElementById('totalAmount');
+        const totalDpElement = document.getElementById('totalDpAmount');
         const payNowBtn = document.getElementById('payNowBtn');
         const payLaterBtn = document.getElementById('payLaterBtn');
         const submitBookingBtn = document.getElementById('submitBooking');
@@ -128,11 +129,14 @@
 
         // Update total amount
         let totalAmount = pricePerHour;
+        let totalDp = pricePerHour / 2;
         if (selectedDuration) {
             totalAmount = pricePerHour * parseInt(selectedDuration);
+            totalDp = totalAmount / 2;
         }
 
         totalAmountElement.textContent = `Rp ${totalAmount.toLocaleString('id-ID')}`;
+        totalDpElement.textContent = `Rp ${totalDp.toLocaleString('id-ID')}`;
 
         // Update button states - only check form validation
         const formValid = validateForm();

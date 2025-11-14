@@ -40,6 +40,10 @@
                 <span class="total-label">Total Biaya</span>
                 <span class="total-amount" id="totalAmount">Rp {{ number_format($room->price, 0, ',', '.') }}</span>
             </div>
+            <div class="summary-dp-total">
+                <span class="dp-label">Total dp yang harus di bayar</span>
+                <span class="total-dp-amount" id="totalDpAmount">Rp {{ number_format($room->price, 0, ',', '.') }}</span>
+            </div>
         </div>
         
         
