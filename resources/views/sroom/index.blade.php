@@ -69,7 +69,7 @@
                   </div>
 
                   <div class = "purchase-info">  
-                    <a href="{{ url('/room/booking') }}" class="btn-gaming">Book Now</a>
+                    <a href="{{ url('/room/booking/' . $room->id) }}" class="btn-gaming">Book Now</a>
                   </div>
                 </div>
           </div>

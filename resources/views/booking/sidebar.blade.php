@@ -7,16 +7,25 @@
         <h3>Ringkasan Pesanan</h3>
     </div>
 
+    
     <div class="summary-content">
         <div class="summary-section">
-            <label class="summary-label">Ruangan Dipilih</label>
-                <div class="selected-room" id="selectedRoom">
-                    <span class="room-name">-</span>
-                    <span class="room-type">-</span>
-                </div>
-            </div>
+            <label class="summary-label">Room Dipilih</label>
+                <div class="room-option">
+                    <h5 class="room">{{ $room->room_title }}</h5>
+                    <p class="room-price">Rp {{ number_format($room->price, 0, ',', '.') }} <span>/ jam</span> </p>
+                </div>   
+        </div>
 
-        <div class="summary-divider"></div>
+        <div class="summary-section">
+            <label class="summary-label">Ruangan Dipilih</label>
+            <div class="selected-room" id="selectedRoom">
+                <span class="room-name">-</span>
+                <span class="room-price">-</span>
+            </div>
+         </div>
+
+        <!-- <div class="summary-divider"></div> -->
 
         <div class="summary-section">
             <label class="summary-label">Durasi</label>
@@ -25,12 +34,15 @@
             </div>
         </div>
 
+
         <div class="summary-divider"></div>
             <div class="summary-total">
                 <span class="total-label">Total Biaya</span>
-                <span class="total-amount" id="totalAmount">Rp 0</span>
+                <span class="total-amount" id="totalAmount">Rp {{ number_format($room->price, 0, ',', '.') }}</span>
             </div>
         </div>
+        
+        
 
         <div class="summary-actions">
             <button class="btn btn-primary" id="payNowBtn" disabled>

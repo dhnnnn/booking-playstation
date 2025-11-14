@@ -488,10 +488,6 @@ button {
   box-shadow: 0 0 20px #9C5DD9, 0 0 40px #F5B700;
 }
 
-@media(max-width: 987px){
-  .btn-gaming{
-  }
-}
 
 .form-search {
   max-width: 972px;
@@ -544,8 +540,7 @@ button {
     padding-left: 18px;
     color: rgb(255, 255, 255);
     font-size: 14px;
-    -webkit-appearance: none;
-    -moz-appearance: none; }
+     }
     .form-select-custom select:focus {
       outline: 0;
       box-shadow: none; }

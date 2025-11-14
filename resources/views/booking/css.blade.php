@@ -137,25 +137,25 @@
             transition: opacity var(--transition-smooth);
         }
 
-        .room-card.available {
+        .room-card.tersedia {
             border-color: rgb(var(--color-available));
         }
 
-        .room-card.available::before {
+        .room-card.tersedia::before {
             background: rgb(var(--color-cyan-glow));
             box-shadow: var(--shadow-cyan-glow);
         }
 
-        .room-card.available:hover {
+        .room-card.tersedia:hover {
             transform: translateY(-4px);
             box-shadow: 0 0 25px rgba(var(--color-available), 0.3);
         }
 
-        .room-card.available:hover::before {
+        .room-card.tersedia:hover::before {
             opacity: 1;
         }
 
-        .room-card.occupied {
+        .room-card.tidak-tersedia {
             border-color: rgb(var(--color-occupied));
             cursor: not-allowed;
             opacity: 0.6;
@@ -196,6 +196,7 @@
             width: 24px;
             height: 24px;
             background: rgb(var(--color-cyan));
+            color: #ffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -224,11 +225,11 @@
             margin-bottom: 0.5rem;
         }
 
-        .room-card.available .room-name {
+        .room-card.tersedia .room-name {
             color: rgb(var(--color-cyan));
         }
 
-        .room-card.occupied .room-name {
+        .room-card.tidak-tersedia .room-name {
             color: rgb(var(--color-occupied));
         }
 
@@ -444,14 +445,15 @@
             margin-bottom: 0.5rem;
         }
 
+        .room-option{
+            display: flex;
+            justify-content: space-between;
+        }
+
         .selected-room {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem 1rem;
-            background: rgba(14, 17, 28, 0.5);
-            border-radius: 0.5rem;
-            border: 1px solid rgba(148 163 184, 0.1);
         }
 
         .room-name {
@@ -476,7 +478,7 @@
             border-radius: 0.5rem;
             border: 1px solid rgba(148 163 184, 0.1);
             color: rgb(148 163 184);
-            font-size: 0.875rem;
+            font-size: 0.975rem;
             min-height: 3rem;
             display: flex;
             align-items: center;
@@ -485,7 +487,7 @@
         .summary-divider {
             height: 1px;
             background: rgba(148 163 184, 0.1);
-            margin: 1.5rem 0;
+            /* margin: 1.5rem 0; */
         }
 
         .summary-total {
@@ -494,8 +496,8 @@
             align-items: center;
             padding: 1rem;
             background: rgba(var(--color-cyan), 0.05);
-            border-radius: 0.75rem;
             border: 1px solid rgba(var(--color-cyan), 0.2);
+            border-top: 1px solid gray;
         }
 
         .total-label {
@@ -574,7 +576,7 @@
         .summary-note {
             padding: 1.5rem;
             font-size: 0.8125rem;
-            color: rgb(100 116 139);
+            color: rgb(148 163 184);
             line-height: 1.6;
             border-top: 1px solid rgba(148 163 184, 0.1);
         }
@@ -583,12 +585,13 @@
 
         /* Booking Form Section */
         .booking-form-section {
-            margin-top: 3rem;
+            margin-top: 0px;
+            margin-bottom: 3rem;
         }
 
         .booking-form {
             color: #ffffff; 
-            background-color: #212529; 
+            background-color: rgb(12, 14, 20); 
             border-radius: 1rem;
             padding: 2rem;
             border: 1px solid rgba(148 163 184, 0.2);
@@ -596,6 +599,11 @@
 
         .form-group {
             margin-bottom: 1.5rem;
+            
+        }
+
+        .form-group:last-child {
+            margin-bottom: 2.5rem;
         }
 
         .form-row {
@@ -606,26 +614,36 @@
 
         .form-label {
             display: block;
-            font-size: 0.875rem;
-            font-weight: 600;
+            font-size: 1rem;
             color: #ffffff; 
-            background-color: #212529; 
+            background-color: rgb(12, 14, 20); 
             margin-bottom: 0.5rem;
+            font-family: inherit;
+            -webkit-appearance: none;
+            -moz-appearance: none;
         }
 
         .form-input {
             width: 100%;
-            padding: 0.875rem 1rem;
+            height: 3rem;
+            padding: 0.15rem 1rem;
             background: rgba(14 17 28, 0.5);
             border: 2px solid rgba(148 163 184, 0.2);
             border-radius: 0.5rem; 
-            color: #ffffff; 
+            color: rgb(100 116 139); 
             background-color: #212529; 
             font-size: 1rem;
             transition: all var(--transition-base);
             -webkit-appearance: none;
             -moz-appearance: none;
         }
+
+        .form-input option {
+            background-color: #212529;
+            color: rgb(100 116 139);
+            padding: 0.5rem;
+        }
+
 
         .form-input:focus {
             outline: none;
@@ -638,6 +656,11 @@
             -webkit-appearance: none;
             -moz-appearance: none;
         }
+
+        .form-btn-group{
+            padding-top: 50px;
+        }
+        
 
         .btn-form {
             width: 100%;
@@ -658,64 +681,213 @@
             box-shadow: 0 0 20px rgba(var(--color-cyan), 0.4);
         }
 
-        .btn-form:not(:disabled):hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(var(--color-cyan), 0.6);
-        }
-
-        .btn-form:not(:disabled):active {
-            transform: translateY(0);
-        }
-
-        .btn-form:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
+        
 
         /* Responsive Design */
         @media (max-width: 1024px) {
             .content-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding-top: 150px;
             }
 
             .order-summary {
                 position: static;
+                margin-top: 2rem;
             }
 
             .rooms-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 1.25rem;
+            }
+
+            .booking-form {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
         }
 
         @media (max-width: 768px) {
-            
+            .content-grid {
+                padding-top: 120px;
+            }
+
             .legend {
-                flex-wrap: wrap;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 0.75rem;
+            }
+
+            .legend-item {
+                font-size: 0.8125rem;
+            }
+
+            .rooms-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
                 gap: 1rem;
             }
-            
+
+            .room-card {
+                padding: 1.25rem 1rem;
+                min-height: 120px;
+            }
+
+            .room-name {
+                font-size: 1.25rem;
+            }
+
+            .booking-form {
+                padding: 2rem;
+            }
+
+            .form-input {
+                height: 3.5rem;
+                font-size: 1rem;
+            }
+
+            .btn-form {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+                min-height: 48px;
+            }
+
+            .summary-card {
+                margin-bottom: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .content-grid {
+                padding-top: 100px;
+            }
+
             .rooms-grid {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 1rem;
+                gap: 0.875rem;
             }
-            
+
             .room-card {
-                padding: 1.5rem 1rem;
+                padding: 1rem 0.75rem;
+                min-height: 100px;
             }
-            
-            .footer-badge {
-                bottom: 1rem;
-                right: 1rem;
-                font-size: 0.75rem;
-                padding: 0.5rem 1rem;
+
+            .room-name {
+                font-size: 1.125rem;
+            }
+
+            .booking-form {
+                padding: 2rem;
+            }
+
+            .form-group {
+                margin-bottom: 1.25rem;
+            }
+
+            .form-label {
+                font-size: 0.8125rem;
+            }
+
+            .form-input {
+                height: 3rem;
+                font-size: 0.9375rem;
+            }
+
+            .btn-form {
+                padding: 0.875rem 1.25rem;
+                font-size: 0.9375rem;
+                min-height: 44px;
+            }
+
+            .legend {
+                padding: 0.5rem;
+            }
+
+            .summary-header {
+                padding: 1rem;
+            }
+
+            .summary-content {
+                padding: 1rem;
+            }
+
+            .summary-actions {
+                padding: 1rem;
             }
         }
 
         @media (max-width: 480px) {
-            
+            .content-grid {
+                padding-top: 200px;
+                gap: 1rem;
+            }
+
             .rooms-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .room-card {
+                padding: 0.875rem 0.5rem;
+                min-height: 90px;
+            }
+
+            .room-name {
+                font-size: 1rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .room-status {
+                font-size: 0.75rem;
+            }
+
+            .booking-form {
+                padding: 0.875rem;
+                margin-bottom: 2rem;
+            }
+
+            .form-row {
+                gap: 1rem;
+            }
+
+            .form-input {
+                height: 2.75rem;
+                font-size: 0.875rem;
+            }
+
+            .btn-form {
+                padding: 0.75rem 1rem;
+                font-size: 0.875rem;
+                min-height: 44px;
+            }
+
+            .section-title {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .legend {
+                margin-bottom: 1.5rem;
+            }
+
+            .summary-card {
+                border-radius: 1rem;
+            }
+
+            .summary-header h3 {
+                font-size: 1rem;
+            }
+
+            .total-amount {
+                font-size: 1.5rem;
             }
         }
     </style>

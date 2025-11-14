@@ -8,6 +8,10 @@ use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\SroomController;
 
+use App\Http\Controllers\BookingController;
+
+
+
 Route::get('/', [AdminController::class, 'home']);
 
 Route::get('/home', [AdminController::class, 'index'])->name('home');
@@ -33,10 +37,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/room/booking', [SroomController::class, 'booking']);
+    //
 });
 
+
 Route::get('/room/detail/{id}', [SroomController::class, 'detail_room']);
+
+Route::get('/room/booking/{id}', [BookingController::class, 'booking']);
 
 
 

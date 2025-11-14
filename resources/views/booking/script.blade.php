@@ -1,5 +1,3 @@
-<script src="{{ asset('js/main.js') }}"></script>
-
 <script src="{{ asset('vendors/jquery/jquery-3.2.1.min.js') }}"></script>
 <script src="{{ asset('vendors/jquery.ajaxchimp.min.js') }}"></script>
 <script src="{{ asset('vendors/bootstrap/bootstrap.bundle.min.js') }}"></script>
@@ -8,65 +6,74 @@
 <script src="{{ asset('vendors/easing.min.js') }}"></script>
 <script src="{{ asset('vendors/superfish.min.js') }}"></script>
 <script src="{{ asset('vendors/nice-select/jquery.nice-select.min.js') }}"></script>
-<script src="{{ asset('vendors/mail-script.js') }}"></script>
 
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
-    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 
 <script>
-    const rooms = [
-        { id: 'REG 1', name: 'REG 1', status: 'available', type: 'regular' },
-        { id: 'REG 2', name: 'REG 2', status: 'occupied', type: 'regular' },
-        { id: 'REG 3', name: 'REG 3', status: 'available', type: 'regular' },
-        { id: 'REG 4', name: 'REG 4', status: 'occupied', type: 'regular' },
-        { id: 'VIP 1', name: 'VIP 1', status: 'available', type: 'vip' },
-        { id: 'REG 5', name: 'REG 5', status: 'available', type: 'regular' },
-        { id: 'REG 6', name: 'REG 6', status: 'available', type: 'regular' },
-        { id: 'REG 7', name: 'REG 7', status: 'occupied', type: 'regular' },
-        { id: 'REG 8', name: 'REG 8', status: 'available', type: 'regular' },
-        { id: 'MGR 1', name: 'MGR 1', status: 'available', type: 'manager' },
-        { id: 'MGR 2', name: 'MGR 2', status: 'available', type: 'manager' },
-        { id: 'VIP 2', name: 'VIP 2', status: 'occupied', type: 'vip' }
-    ];
+    const rooms = @json($units);
 
-   
+
     let selectedRoom = null;
     let selectedDuration = null;
 
     // Initialize
     function init() {
         renderRooms();
-        renderPackages();
         updateOrderSummary();
         attachEventListeners();
+        attachFormValidation();
+    }
+
+    // Validate Form
+    function validateForm() {
+        const fullName = document.getElementById('fullName').value.trim();
+        const phoneNumber = document.getElementById('phoneNumber').value.trim();
+        const bookingDate = document.getElementById('bookingDate').value;
+        const bookingTime = document.getElementById('bookingTime').value;
+        const duration = document.getElementById('duration').value;
+
+        return fullName !== '' && phoneNumber !== '' && bookingDate !== '' && bookingTime !== '' && duration !== '';
+    }
+
+    // Attach Form Validation
+    function attachFormValidation() {
+        const formInputs = ['fullName', 'phoneNumber', 'bookingDate', 'bookingTime', 'duration'];
+
+        formInputs.forEach(inputId => {
+            const input = document.getElementById(inputId);
+            if (input) {
+                input.addEventListener('input', updateOrderSummary);
+                input.addEventListener('change', updateOrderSummary);
+            }
+        });
     }
 
     // Render Rooms
     function renderRooms() {
         const roomsGrid = document.getElementById('roomsGrid');
         roomsGrid.innerHTML = '';
-        
+
         rooms.forEach(room => {
             const roomCard = document.createElement('div');
-            roomCard.className = `room-card ${room.status} ${room.type}`;
+            roomCard.className = `room-card ${room.status.replace(/\s+/g, '-')} ${room.type}`;
             roomCard.dataset.roomId = room.id;
-            
-            if (room.status === 'available') {
+
+            if (room.status === 'tersedia') {
                 roomCard.addEventListener('click', () => selectRoom(room));
             }
-            
+
             roomCard.innerHTML = `
                 <span class="room-name">${room.name}</span>
-                <span class="room-status">${room.status === 'available' ? 'Available' : 'Occupied'}</span>
+                <span class="room-status">${room.status === 'tersedia' ? 'Tersedia' : 'Tidak Tersedia'}</span>
             `;
-            
+
             roomsGrid.appendChild(roomCard);
         });
     }
-    
+
 
     // Select Room
     function selectRoom(room) {
@@ -74,40 +81,27 @@
         document.querySelectorAll('.room-card').forEach(card => {
             card.classList.remove('selected');
         });
-        
+
         // Set new selection
         selectedRoom = room;
         const roomCard = document.querySelector(`[data-room-id="${room.id}"]`);
         roomCard.classList.add('selected');
-        
-        updateOrderSummary();
-    }
 
-    // Select Package
-    function selectPackage(pkg) {
-        // Remove previous selection
-        document.querySelectorAll('.package-card').forEach(card => {
-            card.classList.remove('selected');
-        });
-        
-        // Set new selection
-        selectedPackage = pkg;
-        const packageCard = document.querySelector(`[data-package-id="${pkg.id}"]`);
-        packageCard.classList.add('selected');
-        
         updateOrderSummary();
     }
 
     // Update Order Summary
     function updateOrderSummary() {
         const selectedRoomElement = document.getElementById('selectedRoom');
-        const selectedPackageElement = document.getElementById('selectedPackage');
         const totalAmountElement = document.getElementById('totalAmount');
-        const selectedDurationElement = document.getElementById('selectedDuration');
         const payNowBtn = document.getElementById('payNowBtn');
         const payLaterBtn = document.getElementById('payLaterBtn');
         const submitBookingBtn = document.getElementById('submitBooking');
+        const selectedDurationElement = document.getElementById('selectedDuration');
+        const durationSelect = document.getElementById("duration");
+        const pricePerHour = {{ $room->price }};
 
+        
         // Update room selection
         if (selectedRoom) {
             selectedRoomElement.innerHTML = `
@@ -121,29 +115,30 @@
             `;
         }
 
-        // Update package selection
-        if (selectedPackage) {
-            selectedPackageElement.textContent = selectedPackage.name;
-        } else {
-            selectedPackageElement.textContent = 'Belum ada paket dipilih';
-        }
-
         // Duration
+        durationSelect.addEventListener('change', function() {
+            const selectedDuration = this.value; // Ambil nilai dari select
+
+            if (selectedDuration) {
+                selectedDurationElement.textContent = `${selectedDuration} Jam`;
+            } else {
+                selectedDurationElement.textContent = '-';
+            }
+        });
+
+        // Update total amount
+        let totalAmount = pricePerHour;
         if (selectedDuration) {
-            selectedDurationElement.textContent = `${selectedDuration} Jam`;
-        } else {
-            selectedDurationElement.textContent = '-';
+            totalAmount = pricePerHour * parseInt(selectedDuration);
         }
 
-        // Update total
-        const total = selectedPackage ? selectedPackage.price : 0;
-        totalAmountElement.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+        totalAmountElement.textContent = `Rp ${totalAmount.toLocaleString('id-ID')}`;
 
-        // Update button states
-        const canProceed = selectedRoom && selectedPackage;
-        payNowBtn.disabled = !canProceed;
-        payLaterBtn.disabled = !canProceed;
-        submitBookingBtn.disabled = !canProceed;
+        // Update button states - only check form validation
+        const formValid = validateForm();
+        payNowBtn.disabled = !formValid;
+        payLaterBtn.disabled = !formValid;
+        // submitBookingBtn.disabled = !formValid;
     }
 
     // Event Listeners
@@ -151,21 +146,13 @@
         const payNowBtn = document.getElementById('payNowBtn');
         const payLaterBtn = document.getElementById('payLaterBtn');
         const durationSelect = document.getElementById('duration');
-        
+
         payNowBtn.addEventListener('click', () => {
-            if (selectedRoom && selectedPackage) {
-                showNotification('Pembayaran berhasil!', 'success');
-                // In a real app, this would process the payment
-                resetBooking();
-            }
+            //
         });
-        
+
         payLaterBtn.addEventListener('click', () => {
-            if (selectedRoom && selectedPackage) {
-                showNotification('Booking berhasil! Silakan bayar di kasir.', 'info');
-                // In a real app, this would create a reservation
-                resetBooking();
-            }
+            //
         });
 
         durationSelect.addEventListener('change', (e) => {
@@ -174,79 +161,80 @@
         });
     }
 
-    // Reset Booking
-    function resetBooking() {
-        selectedRoom = null;
-        selectedPackage = null;
-        
-        document.querySelectorAll('.room-card').forEach(card => {
-            card.classList.remove('selected');
-        });
-        
-        document.querySelectorAll('.package-card').forEach(card => {
-            card.classList.remove('selected');
-        });
-        
-        updateOrderSummary();
-    }
+    //------- initialize menu --------//   
+    $('.nav-menu').superfish({
+        animation: {
+            opacity: 'show'
+        },
+        speed: 400
+    });
 
-    // Show Notification
-    function showNotification(message, type = 'success') {
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            background: ${type === 'success' ? 'rgba(6, 182, 212, 0.95)' : 'rgba(168, 85, 247, 0.95)'};
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            animation: slideIn 0.3s ease-out;
-        `;
-        notification.textContent = message;
-        
-        // Add animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(400px);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-            @keyframes slideOut {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(400px);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        document.body.appendChild(notification);
-        
-        // Remove notification after 3 seconds
-        setTimeout(() => {
-            notification.style.animation = 'slideOut 0.3s ease-in';
-            setTimeout(() => {
-                document.body.removeChild(notification);
-                document.head.removeChild(style);
-            }, 300);
-        }, 3000);
-    }
+  //* Navbar Fixed
+    var window_width = $(window).width(),
+		window_height = window.innerHeight,
+		header_height = $('.default-header').height(),
+		header_height_static = $('.site-header.static').outerHeight(),
+		fitscreen = window_height - header_height;
+
+	$('.fullscreen').css('height', window_height);
+	$('.fitscreen').css('height', fitscreen);
+	var nav_offset_top = $('header').height() + 50;
+	function navbarFixed() {
+		if ($('.header_area').length) {
+			$(window).scroll(function() {
+				var scroll = $(window).scrollTop();
+				if (scroll >= nav_offset_top) {
+					$('.header_area').addClass('navbar_fixed');
+				} else {
+					$('.header_area').removeClass('navbar_fixed');
+				}
+			});
+		}
+	}
+	navbarFixed();
+
+  
+  //------- mobile navigation --------//  
+  if ($('#nav-menu-container').length) {
+    var $mobile_nav = $('#nav-menu-container').clone().prop({
+      id: 'mobile-nav'
+    });
+    $mobile_nav.find('> ul').attr({
+      'class': '',
+      'id': ''
+    });
+    $('body').append($mobile_nav);
+    $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="lnr lnr-menu"></i></button>');
+    $('body').append('<div id="mobile-body-overly"></div>');
+    $('#mobile-nav').find('.menu-has-children').prepend('<i class="lnr lnr-chevron-down"></i>');
+
+    $(document).on('click', '.menu-has-children i', function(e) {
+      $(this).next().toggleClass('menu-item-active');
+      $(this).nextAll('ul').eq(0).slideToggle();
+      $(this).toggleClass("lnr-chevron-up lnr-chevron-down");
+    });
+
+    $(document).on('click', '#mobile-nav-toggle', function(e) {
+      $('body').toggleClass('mobile-nav-active');
+      $('#mobile-nav-toggle i').toggleClass('lnr-cross lnr-menu');
+      $('#mobile-body-overly').toggle();
+    });
+
+    $(document).click(function(e) {
+      var container = $("#mobile-nav, #mobile-nav-toggle");
+      if (!container.is(e.target) && container.has(e.target).length === 0) {
+        if ($('body').hasClass('mobile-nav-active')) {
+          $('body').removeClass('mobile-nav-active');
+          $('#mobile-nav-toggle i').toggleClass('lnr-cross lnr-menu');
+          $('#mobile-body-overly').fadeOut();
+        }
+      }
+    });
+  } else if ($("#mobile-nav, #mobile-nav-toggle").length) {
+    $("#mobile-nav, #mobile-nav-toggle").hide();
+  }
 
     // Start the app
     init();
 </script>
+
