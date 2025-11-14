@@ -1,61 +1,82 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MD Gaming – Playstation Online Booking System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+MD Gaming adalah sistem booking online yang mempermudah pelanggan untuk melakukan pemesanan Unit gaming secara cepat dan real-time. Sistem ini menggantikan proses booking manual, sehingga lebih efisien, transparan, dan mudah digunakan baik oleh admin maupun pelanggan.
 
-## About Laravel
+## 🚀 Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. Booking Real-Time
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+   - Pengguna dapat memilih tanggal, jam, durasi, dan unit yang tersedia.
+   - Status unit otomatis berubah menjadi Tersedia / Tidak Tersedia sesuai booking yang dibuat.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2. Manajemen Unit
 
-## Learning Laravel
+   - Setiap unit memiliki status yang akan diperbarui secara otomatis.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+   - Admin bisa menambah, mengedit, atau menghapus data unit.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. Tampilan UI Modern
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   - Desain clean, gelap, dan modern.
 
-## Laravel Sponsors
+   - Menggunakan kombinasi HTML, CSS, dan JavaScript.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+   - Komponen responsif untuk mobile dan desktop.
 
-### Premium Partners
+4. Sistem Validasi
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+   - Validasi input saat form booking di-submit.
 
-## Contributing
+   - Mencegah double booking pada jam dan tanggal yang sama.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛠️ Teknologi yang Digunakan
 
-## Code of Conduct
+- Laravel — Backend & Routing
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Blade Template — View system
 
-## Security Vulnerabilities
+- MySQL — Database untuk booking dan status unit
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- CSS Custom — UI theme dark modern
 
-## License
+- JavaScript — Interaksi (durasi, waktu, status)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📘 Cara Menggunakan
+1. Clone Repository
+2. Install Dependencies
+```bash
+composer install
+npm install
+```
+3. Setup Environment
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+Sesuaikan database pada .env:
+
+```makefile
+DB_DATABASE=booking_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+4. Migrate Database
+```bash
+php artisan migrate
+```
+
+5. Jalankan Server
+```bash
+php artisan serve
+```
+## 🧪 Cara Kerja Booking
+
+User memilih tanggal dan jam.
+
+1. Sistem mengecek apakah unit tersebut sudah dibooking atau masih tersedia.
+
+2. Jika tersedia → sistem menyimpan booking dan status unit berubah menjadi Tidak Tersedia di jam tersebut.
+
+3. Jika tidak tersedia → user akan mendapat pesan bahwa unit sedang dipakai.
