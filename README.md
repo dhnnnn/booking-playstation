@@ -5,28 +5,20 @@ MD Gaming adalah sistem booking online yang mempermudah pelanggan untuk melakuka
 ## 🚀 Fitur Utama
 
 1. Booking Real-Time
-
    - Pengguna dapat memilih tanggal, jam, durasi, dan unit yang tersedia.
    - Status unit otomatis berubah menjadi Tersedia / Tidak Tersedia sesuai booking yang dibuat.
 
 2. Manajemen Unit
-
    - Setiap unit memiliki status yang akan diperbarui secara otomatis.
-
    - Admin bisa menambah, mengedit, atau menghapus data unit.
 
 3. Tampilan UI Modern
-
    - Desain clean, gelap, dan modern.
-
    - Menggunakan kombinasi HTML, CSS, dan JavaScript.
-
    - Komponen responsif untuk mobile dan desktop.
 
 4. Sistem Validasi
-
    - Validasi input saat form booking di-submit.
-
    - Mencegah double booking pada jam dan tanggal yang sama.
 
 ## 🛠️ Teknologi yang Digunakan
@@ -43,6 +35,10 @@ MD Gaming adalah sistem booking online yang mempermudah pelanggan untuk melakuka
 
 ## 📘 Cara Menggunakan
 1. Clone Repository
+```bash
+git clone https://github.com/dhnnnn/booking-playstation.git
+cd booking-playstation
+```
 2. Install Dependencies
 ```bash
 composer install
