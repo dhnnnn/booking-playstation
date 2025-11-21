@@ -176,10 +176,10 @@
             }
 
         // Update total amount
-        let totalAmount = pricePerHour;
-        let totalDp = pricePerHour / 2;
+        let totalAmount = pricePerHour + addonsTotal;
+        let totalDp = totalAmount / 2;
         if (selectedDuration) {
-            totalAmount = pricePerHour * parseInt(selectedDuration);
+            totalAmount = totalAmount * parseInt(selectedDuration);
             totalDp = totalAmount / 2;
         }
 
