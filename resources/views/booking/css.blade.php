@@ -54,6 +54,11 @@
         }
 
 
+        .addons-list {
+            margin-top: 10px;
+        }
+
+        /* Layout */
         .content-grid {
             display: grid;
             grid-template-columns: 1fr 380px;
@@ -73,6 +78,14 @@
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
 
+        .addon-summary-name {
+            color: #aaa;
+        }
+
+        .addon-summary-price {
+            color: #aaa;
+        }
+
         .legend-item {
             display: flex;
             align-items: center;
@@ -87,12 +100,21 @@
             border-radius: 2px;
         }
 
+        .legend-available{
+            color: rgb(var(--color-available));
+            background: rgb(var(--color-available));
+        }
+
+        .legend-occupied{
+            color: rgb(var(--color-occupied));
+            background: rgb(var(--color-occupied));
+        }
  
 
         /* Rooms Grid */
         .rooms-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 1.5rem;
             margin-bottom: 3rem;
         }
@@ -217,6 +239,10 @@
             font-weight: 700;
             margin-bottom: 1.5rem;
             color: rgb(248 250 252);
+        }
+
+        .section-tempat{
+            padding-top: 2rem;
         }
 
         .packages-list {
@@ -410,6 +436,13 @@
             justify-content: space-between;
         }
 
+        .addon-summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
         .selected-room {
             display: flex;
             justify-content: space-between;
@@ -459,6 +492,7 @@
             border: 1px solid rgba(var(--color-cyan), 0.2);
             border-top: 1px solid gray;
         }
+
 
         .summary-dp-total{
             display: flex;
@@ -662,6 +696,92 @@
             gap: 0.5rem;
             font-family: inherit;
             box-shadow: 0 0 20px rgba(var(--color-cyan), 0.4);
+        }
+
+        /* ADDONS SECTION */
+        .addons-section {
+            margin-top: 30px;
+        }
+
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .addon-card {
+            background-color: #1f2127;
+            border: 1px solid #2a2d35;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .addon-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: #2a2d35;
+        }
+
+        .addon-info {
+            flex: 1;
+        }
+
+        .addon-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #ffffff;
+        }
+
+        .addon-price {
+            color: #00d9ff;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid #2a2d35;
+            background-color: #1f2127;
+            color: #ffffff;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background-color: #00d9ff;
+            border-color: #00d9ff;
+            color: #0a0a0b;
+        }
+
+        .quantity-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .quantity-display {
+            min-width: 30px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
         }
 
         

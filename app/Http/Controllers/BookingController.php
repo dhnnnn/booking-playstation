@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\RoomUnit;
 use App\Models\Fasilitas;
+use App\Models\Addons;
 
 class BookingController extends Controller
 {
     public function booking($id)
     {
         $room = Room::with('units')->findOrFail($id);
+        $addons = Addons::all();
 
         // ubah data unit ke format JS
         $units = $room->units->map(function ($unit) {
@@ -24,6 +26,6 @@ class BookingController extends Controller
             ];
         });
 
-        return view('booking.index', compact('room', 'units'));
+        return view('booking.index', compact('room', 'units', 'addons'));
     }
 }

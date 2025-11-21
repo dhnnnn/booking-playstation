@@ -15,6 +15,15 @@
 <script>
     const rooms = @json($units);
 
+    const addons = {
+        cocacola: { name: 'Coca Cola', price: 5000, quantity: 0 },
+        sprite: { name: 'Sprite', price: 5000, quantity: 0 },
+        chips: { name: 'Keripik', price: 10000, quantity: 0 },
+        popcorn: { name: 'Popcorn', price: 8000, quantity: 0 },
+        controller: { name: 'Extra Controller', price: 15000, quantity: 0 },
+        coklat: { name: 'Coklat', price: 12000, quantity: 0 }
+    };
+
 
     let selectedRoom = null;
     let selectedDuration = null;
@@ -90,6 +99,18 @@
         updateOrderSummary();
     }
 
+    // Change addon quantity
+    function changeQuantity(addonId, change) {
+        const currentQty = addons[addonId].quantity;
+        const newQty = currentQty + change;
+            
+        if (newQty >= 0) {
+            addons[addonId].quantity = newQty;
+            document.getElementById(`qty-${addonId}`).textContent = newQty;
+            updateOrderSummary();
+        }
+    }
+
     // Update Order Summary
     function updateOrderSummary() {
         const selectedRoomElement = document.getElementById('selectedRoom');
@@ -127,6 +148,33 @@
             }
         });
 
+        // Calculate addons total
+            let addonsTotal = 0;
+            let addonsListHTML = '';
+            let hasAddons = false;
+            
+            for (const [id, addon] of Object.entries(addons)) {
+                if (addon.quantity > 0) {
+                    hasAddons = true;
+                    const itemTotal = addon.price * addon.quantity;
+                    addonsTotal += itemTotal;
+                    
+                    addonsListHTML += `
+                        <div class="addon-summary-item">
+                            <span class="addon-summary-name">${addon.name} x${addon.quantity}</span>
+                            <span class="addon-summary-price">${formatRupiah(itemTotal)}</span>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Update addons list
+            if (hasAddons) {
+                document.getElementById('addonsList').innerHTML = addonsListHTML;
+            } else {
+                document.getElementById('addonsList').innerHTML = '<p style="color: #666; font-size: 14px;">Belum ada add-ons</p>';
+            }
+
         // Update total amount
         let totalAmount = pricePerHour;
         let totalDp = pricePerHour / 2;
@@ -143,6 +191,10 @@
         payNowBtn.disabled = !formValid;
         payLaterBtn.disabled = !formValid;
         // submitBookingBtn.disabled = !formValid;
+    }
+
+    function formatRupiah(amount) {
+        return 'Rp ' + amount.toLocaleString('id-ID');
     }
 
     // Event Listeners

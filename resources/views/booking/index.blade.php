@@ -19,9 +19,6 @@
                     <!-- Booking Form Section -->
                     @include('booking.form')
 
-                    <!-- Ruangan section -->
-                    @include('booking.ruangan')
-
                     <!-- Addons section -->
                 </div>
 

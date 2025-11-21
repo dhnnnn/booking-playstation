@@ -34,6 +34,13 @@
             </div>
         </div>
 
+        <div class="summary-section">
+            <label class="summary-label">Addons</label>
+            <div class="addons-list" id="addonsList">
+                -
+            </div>
+        </div>
+
 
         <div class="summary-divider"></div>
             <div class="summary-total">
