@@ -21,13 +21,16 @@
                         <input type="text" id="nama-barang" name="nama-barang" value="{{$addons->addons_title}}" required>
 
                         <label for="deskripsi-barang">Deskripsi Barang:</label>
-                        <textarea id="deskripsi-barang" name="deskripsi-barang" value="{{$addons->description}}" required></textarea>
+                        <textarea id="deskripsi-barang" name="deskripsi-barang" required>{{$addons->description}}</textarea>
 
                         <label for="harga">Harga:</label>
                         <input type="number" id="harga" name="harga" value="{{$addons->price}}" required>
 
+                        <label for="stock">Stok:</label>
+                        <input type="number" id="stock" name="stock" value="{{$addons->stock}}" required>
+                        
                         <label for="photo">Foto Barang :</label>
-                        <input type="file" id="photo" name="photo[]" multiple required>
+                        <input type="file" id="photo" name="photo[]" multiple>
 
 
                         <button type="submit" class="submit-btn">Update Barang</button>

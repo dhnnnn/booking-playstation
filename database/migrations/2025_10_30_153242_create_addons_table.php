@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('description') -> nullable();
             $table->string('price') -> nullable();
             $table->string('image') -> nullable();
+            $table->string('stock') -> nullable();
             $table->timestamps();
         });
     }

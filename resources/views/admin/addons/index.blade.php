@@ -22,7 +22,7 @@
                                 <th>Add Ons ID</th>
                                 <th>Gambar</th>
                                 <th>Nama Barang</th>
-                                <th>Deskripsi</th>
+                                <th>Stok</th>
                                 <th>Harga</th>
                                 <th>Aksi</th>
                             </tr>
@@ -36,7 +36,7 @@
                                     <img width="80" src="{{ asset('images/addons/' . $addons->image) }}" alt="">
                                 </td>
                                 <td>{{$addons->addons_title}}</td>
-                                <td>{{$addons->description}}</td>
+                                <td>{{$addons->stock}}</td>
                                 <td>Rp. {{number_format($addons->price, 0, ',','.')}}</td>
                                 <td>
                                     <a href="{{url('addons/update', $addons->id)}}"><button class="edit-btn"><i class="fa-solid fa-pen-to-square"></i> Edit</button></a>

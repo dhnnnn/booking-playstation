@@ -191,6 +191,7 @@ class AdminController extends Controller
             'nama-barang' => 'required|string|max:255',
             'deskripsi-barang' => 'required|string',
             'harga' => 'required|numeric',
+            'stock' => 'required|integer',
             'photo.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -199,6 +200,7 @@ class AdminController extends Controller
         $addons->addons_title = $request->input('nama-barang');
         $addons->description = $request->input('deskripsi-barang');
         $addons->price = $request->input('harga');
+        $addons->stock = $request->input('stock');
 
         // Handle images
         if ($request->hasFile('photo')) {
@@ -237,6 +239,7 @@ class AdminController extends Controller
         $addons->addons_title = $request->input('nama-barang');
         $addons->description = $request->input('deskripsi-barang');
         $addons->price = $request->input('harga');
+        $addons->stock = $request->input('stock');
 
         // Handle images
         if ($request->hasFile('photo')) {

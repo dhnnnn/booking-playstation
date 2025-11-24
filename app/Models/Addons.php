@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 
 class Addons extends Model
 {
-
     use HasFactory;
 
     protected $primaryKey = 'id'; 
@@ -23,6 +22,7 @@ class Addons extends Model
         'description',
         'price',
         'image',
+        'stock'
     ];
 
     public static function boot()

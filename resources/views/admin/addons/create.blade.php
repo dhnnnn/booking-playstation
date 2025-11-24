@@ -26,6 +26,9 @@
                         <label for="harga">Harga:</label>
                         <input type="number" id="harga" name="harga" required>
 
+                        <label for="stock">Stok:</label>
+                        <input type="number" id="stock" name="stock" required>
+
                         <label for="photo">Foto Barang :</label>
                         <input type="file" id="photo" name="photo[]" multiple required>
 

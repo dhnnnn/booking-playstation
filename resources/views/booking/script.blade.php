@@ -16,12 +16,14 @@
     const rooms = @json($units);
 
     const addons = {
-        cocacola: { name: 'Coca Cola', price: 5000, quantity: 0 },
-        sprite: { name: 'Sprite', price: 5000, quantity: 0 },
-        chips: { name: 'Keripik', price: 10000, quantity: 0 },
-        popcorn: { name: 'Popcorn', price: 8000, quantity: 0 },
-        controller: { name: 'Extra Controller', price: 15000, quantity: 0 },
-        coklat: { name: 'Coklat', price: 12000, quantity: 0 }
+        @foreach($addons as $addon)
+            "{{ $addon->id }}": {
+                id: "{{ $addon->id }}",
+                name: "{{ $addon->addons_title }}",
+                price: {{ $addon->price }},
+                quantity: 0
+            },
+        @endforeach
     };
 
 
@@ -101,15 +103,21 @@
 
     // Change addon quantity
     function changeQuantity(addonId, change) {
+
+        console.log("Addon ID:", addonId);             // <--- CEK ID MASUK
+        console.log("Data:", addons[addonId]); 
+        
         const currentQty = addons[addonId].quantity;
         const newQty = currentQty + change;
-            
+
         if (newQty >= 0) {
             addons[addonId].quantity = newQty;
             document.getElementById(`qty-${addonId}`).textContent = newQty;
+
             updateOrderSummary();
         }
     }
+
 
     // Update Order Summary
     function updateOrderSummary() {

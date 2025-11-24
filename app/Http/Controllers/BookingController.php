@@ -14,7 +14,8 @@ class BookingController extends Controller
     public function booking($id)
     {
         $room = Room::with('units')->findOrFail($id);
-        $addons = Addons::all();
+        $addons = Addons::All();
+        
 
         // ubah data unit ke format JS
         $units = $room->units->map(function ($unit) {
