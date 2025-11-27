@@ -957,13 +957,15 @@ button {
 .img-showcase img{
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;     /* crop otomatis */
+  flex-shrink: 0; 
 }
 .img-select{
   display: flex;
   justify-content: center;
   gap: 8px;
   margin-top: 10px;
+  object-fit: cover;
 }
 .img-item{
   margin: 0.3rem;

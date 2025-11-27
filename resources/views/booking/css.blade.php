@@ -130,16 +130,6 @@
             overflow: hidden;
         }
 
-        .room-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            opacity: 0;
-            transition: opacity var(--transition-smooth);
-        }
 
         .room-card.tersedia {
             border-color: rgb(var(--color-available));
@@ -928,70 +918,384 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .content-grid {
-                padding-top: 200px;
-                gap: 1rem;
-            }
+       @media (max-width: 480px) {
+    /* Reset dasar */
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
 
-            .rooms-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.75rem;
-            }
+    * {
+        box-sizing: border-box;
+    }
 
-            .room-card {
-                padding: 0.875rem 0.5rem;
-                min-height: 90px;
-            }
+    /* ===== CONTAINER UTAMA ===== */
+    .container-booking {
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0 16px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
 
-            .room-name {
-                font-size: 1rem;
-                margin-bottom: 0.25rem;
-            }
+    .content-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+        padding-top: 160px;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
 
-            .room-status {
-                font-size: 0.75rem;
-            }
+    /* ===== ROOMS SECTION ===== */
+    .rooms-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+    }
 
-            .booking-form {
-                padding: 0.875rem;
-                margin-bottom: 2rem;
-            }
+    /* ===== BOOKING FORM SECTION ===== */
+    .booking-form-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 16px !important;
+        margin: 0 auto 20px auto !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+        border-radius: 12px !important;
+        box-sizing: border-box !important;
+    }
 
-            .form-row {
-                gap: 1rem;
-            }
+    /* Section Title */
+    .section-title,
+    h1 {
+        font-size: 18px !important;
+        margin-top: 32px !important;
+        margin-bottom: 16px !important;
+        padding: 0 !important;
+        font-weight: 700 !important;
+    }
 
-            .form-input {
-                height: 2.75rem;
-                font-size: 0.875rem;
-            }
+    /* ===== BOOKING FORM ===== */
+    .booking-form {
+        padding: 0 !important;
+        margin: 0 auto !important;
+        border-radius: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        background: transparent !important;
+    }
 
-            .btn-form {
-                padding: 0.75rem 1rem;
-                font-size: 0.875rem;
-                min-height: 44px;
-            }
+    /* Form Labels */
+    .form-label,
+    label {
+        font-size: 13px !important;
+        margin-bottom: 6px !important;
+        display: block;
+        font-weight: 500 !important;
+    }
 
-            .section-title {
-                font-size: 1.25rem;
-                margin-bottom: 1rem;
-            }
+    /* Form Row */
+    .form-row {
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
 
-            .legend {
-                margin-bottom: 1.5rem;
-            }
+    .form-group {
+        width: 100% !important;
+        margin: 0 auto 12px auto !important;
+        padding: 0 !important;
+    }
 
-            .summary-card {
-                border-radius: 1rem;
-            }
+    /* All Inputs */
+    .form-input,
+    .form-select,
+    input[type="text"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    input,
+    select {
+        height: 40px !important;
+        font-size: 14px !important;
+        padding: 0 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 auto !important;
+        border-radius: 8px;
+    }
 
-            .summary-header h3 {
-                font-size: 1rem;
-            }
+    /* Button */
+    .btn-form,
+    button[type="submit"],
+    .btn {
+        padding: 14px 16px !important;
+        font-size: 15px !important;
+        min-height: 48px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 16px auto 0 auto !important;
+        border-radius: 10px;
+        font-weight: 600 !important;
+        display: block !important;
+    }
 
-            .total-amount {
-                font-size: 1.5rem;
-            }
-        }
+    /* ===== PILIH TEMPAT SECTION ===== */
+    .pilih-tempat-section,
+    .room-selection-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 20px auto !important;
+        padding: 16px !important;
+        box-sizing: border-box !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+        border-radius: 12px !important;
+    }
+
+    /* Pilih Tempat Title */
+    h2 {
+        font-size: 17px !important;
+        margin: 0 auto 16px auto !important;
+        font-weight: 700 !important;
+        padding: 0 !important;
+        text-align:  !important;
+    }
+
+    /* ===== LEGEND ===== */
+    .legend {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        margin: 0 auto 16px auto !important;
+        width: 100% !important;
+        padding: 12px !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 10px !important;
+        box-sizing: border-box !important;
+    }
+
+    .legend-item {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        font-size: 13px !important;
+        padding: 8px 10px !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+        border-radius: 8px !important;
+    }
+
+    .legend-color {
+        width: 18px !important;
+        height: 18px !important;
+        border-radius: 4px !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* ===== ROOMS GRID ===== */
+    .rooms-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        justify-items: center !important;
+    }
+
+    .room-card {
+        padding: 14px 12px !important;
+        min-height: 85px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        border-radius: 12px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        border: 2px solid transparent !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .room-card:active {
+        transform: scale(0.97) !important;
+    }
+
+    .room-name {
+        font-size: 15px !important;
+        margin-bottom: 6px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.3px !important;
+    }
+
+    .room-status {
+        font-size: 11px !important;
+        opacity: 0.85 !important;
+        font-weight: 500 !important;
+    }
+
+    /* ===== TAMBAHAN (ADD-ONS) SECTION ===== */
+    
+    .addons-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        grid-template-columns: 1fr !important;
+        grid-auto-flow: row !important;
+        gap: 12px !important;
+    }
+
+    /* Addon Card */
+    .addons-grid .addon-card {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        padding: 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        border-radius: 12px !important;
+        gap: 12px !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        margin: 0 !important;
+        float: none !important;
+    }
+
+    /* Addon Image */
+    .addon-card .addon-image {
+        width: 65px !important;
+        height: 65px !important;
+        border-radius: 10px !important;
+        object-fit: cover !important;
+        flex-shrink: 0 !important;
+    }
+
+    /* Addon Info */
+    .addon-card .addon-info {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        min-width: 0 !important;
+    }
+
+    .addon-info .addon-name {
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+        line-height: 1.3 !important;
+        color: #ffffff !important;
+    }
+
+    .addon-info .addon-price {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: #00d9ff !important;
+        margin: 0 !important;
+    }
+
+    /* Quantity Controls */
+    .addon-info .quantity-controls {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin-top: 4px !important;
+    }
+
+    .quantity-controls .quantity-btn {
+        width: 34px !important;
+        height: 34px !important;
+        font-size: 18px !important;
+        border-radius: 8px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        font-weight: 700 !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        transition: all 0.2s ease !important;
+        line-height: 1 !important;
+        padding: 0 !important;
+    }
+
+    .quantity-controls .quantity-btn:active {
+        transform: scale(0.95) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    .quantity-controls .quantity-display {
+        font-size: 15px !important;
+        min-width: 30px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+    }
+
+    /* ===== ORDER SUMMARY SIDEBAR ===== */
+    .order-summary {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 20px auto !important;
+        box-sizing: border-box !important;
+    }
+
+    .summary-card {
+        border-radius: 12px;
+        padding: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 auto !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+    }
+
+    .summary-header h3 {
+        font-size: 16px !important;
+        margin-bottom: 12px !important;
+        font-weight: 700 !important;
+        text-align: center !important;
+    }
+
+    .summary-item {
+        font-size: 14px !important;
+        padding: 8px 0 !important;
+        display: flex !important;
+        justify-content: space-between !important;
+    }
+
+    .summary-item span:first-child {
+        font-size: 13px !important;
+        opacity: 0.8 !important;
+    }
+
+    .total-amount {
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        text-align: center !important;
+    }
+}
     </style>

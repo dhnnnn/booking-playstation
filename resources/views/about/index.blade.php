@@ -31,7 +31,7 @@
         <!-- ================ welcome section end ================= --> 
 
         <!-- ================ special section start ================= -->
-        @include('home.Fasilitas')
+        @include('home.fasilitas')
         <!-- ================ special section end ================= -->
 
         <!-- ================ carousel section start ================= -->

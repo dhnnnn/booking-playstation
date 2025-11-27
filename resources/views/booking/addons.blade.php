@@ -1,5 +1,5 @@
 <div class="addons-section">
-    <div class="section-title">Tambahan (Add-ons)</div>
+    <h2 class="section-title">Tambahan (Add-ons)</h2>
     <div class="addons-grid">
         @foreach($addons as $addon)
             <div class="addon-card">

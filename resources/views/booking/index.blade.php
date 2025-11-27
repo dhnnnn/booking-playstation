@@ -12,7 +12,7 @@
     
     <!-- Main Content -->
     <main class="site-main">
-        <div class="container">
+        <div class="container booking-container">
             <div class="content-grid">
                 <!-- Rooms Section -->
                 <div class="rooms-section">

@@ -102,11 +102,7 @@
     }
 
     // Change addon quantity
-    function changeQuantity(addonId, change) {
-
-        console.log("Addon ID:", addonId);             // <--- CEK ID MASUK
-        console.log("Data:", addons[addonId]); 
-        
+    function changeQuantity(addonId, change) {     
         const currentQty = addons[addonId].quantity;
         const newQty = currentQty + change;
 
@@ -125,7 +121,6 @@
         const totalAmountElement = document.getElementById('totalAmount');
         const totalDpElement = document.getElementById('totalDpAmount');
         const payNowBtn = document.getElementById('payNowBtn');
-        const payLaterBtn = document.getElementById('payLaterBtn');
         const submitBookingBtn = document.getElementById('submitBooking');
         const selectedDurationElement = document.getElementById('selectedDuration');
         const durationSelect = document.getElementById("duration");
@@ -197,7 +192,6 @@
         // Update button states - only check form validation
         const formValid = validateForm();
         payNowBtn.disabled = !formValid;
-        payLaterBtn.disabled = !formValid;
         // submitBookingBtn.disabled = !formValid;
     }
 
@@ -208,16 +202,12 @@
     // Event Listeners
     function attachEventListeners() {
         const payNowBtn = document.getElementById('payNowBtn');
-        const payLaterBtn = document.getElementById('payLaterBtn');
         const durationSelect = document.getElementById('duration');
 
         payNowBtn.addEventListener('click', () => {
             //
         });
 
-        payLaterBtn.addEventListener('click', () => {
-            //
-        });
 
         durationSelect.addEventListener('change', (e) => {
             selectedDuration = e.target.value;
