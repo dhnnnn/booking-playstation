@@ -712,6 +712,7 @@
         .addon-card {
             background-color: #1f2127;
             border: 1px solid #2a2d35;
+            
             border-radius: 12px;
             padding: 15px;
             display: flex;
