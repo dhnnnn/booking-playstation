@@ -10,13 +10,14 @@ use App\Http\Controllers\SroomController;
 
 use App\Http\Controllers\BookingController;
 
+use App\Http\Controllers\PaymentController;
 
 
 Route::get('/', [AdminController::class, 'home']);
 
 Route::get('/home', [AdminController::class, 'index'])->name('home');
 
-Route::middleware(['auth', 'admin'])->group(function () {
+//Route::middleware(['auth', 'admin'])->group(function () {
 
     //menage rooms
     Route::get('/rooms', [AdminController::class, 'rooms'])->name('rooms');
@@ -34,16 +35,22 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/addons/update/{id}', [AdminController::class, 'addons_update']);
     Route::post('/edit_addons/{id}', [AdminController::class, 'edit_addons']);
 
-});
+//});
 
-Route::middleware(['auth'])->group(function () {
-    //
-});
+// Route::middleware(['auth'])->group(function () {
+//     //
+// });
 
 
 Route::get('/room/detail/{id}', [SroomController::class, 'detail_room']);
 
 Route::get('/room/booking/{id}', [BookingController::class, 'booking']);
+Route::post('/room/booking/{id}', [BookingController::class, 'booking']);
+
+//Payment midtrans
+Route::post('/create-payment', [PaymentController::class, 'createPayment']);
+
+Route::post('/midtrans/notification', [PaymentController::class, 'handleCallback']); // callback
 
 
 

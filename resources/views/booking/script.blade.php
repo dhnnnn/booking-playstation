@@ -12,6 +12,9 @@
 
 
 
+
+
+
 <script>
     const rooms = @json($units);
 
@@ -46,7 +49,7 @@
         const bookingTime = document.getElementById('bookingTime').value;
         const duration = document.getElementById('duration').value;
 
-        return fullName !== '' && phoneNumber !== '' && bookingDate !== '' && bookingTime !== '' && duration !== '';
+        return fullName !== '' && phoneNumber !== '' && bookingDate !== '' && bookingTime !== '' && duration !== '' && selectedRoom !== null;
     }
 
     // Attach Form Validation
@@ -99,6 +102,11 @@
         roomCard.classList.add('selected');
 
         updateOrderSummary();
+        
+        // Trigger validation check explicitly
+        const formValid = validateForm();
+        const payNowBtn = document.getElementById('payNowBtn');
+        payNowBtn.disabled = !formValid;
     }
 
     // Change addon quantity
@@ -189,6 +197,13 @@
         totalAmountElement.textContent = `Rp ${totalAmount.toLocaleString('id-ID')}`;
         totalDpElement.textContent = `Rp ${totalDp.toLocaleString('id-ID')}`;
 
+
+        // Simpan nilai ke hidden input (angka mentah, tanpa format)
+        document.getElementById('total_harga').value = Math.round(totalAmount);
+        document.getElementById('total_dp').value = Math.round(totalDp);
+        document.getElementById('unit_id').value = selectedRoom ? selectedRoom.id : '';
+        document.getElementById('addons_price').value = Math.round(addonsTotal);
+
         // Update button states - only check form validation
         const formValid = validateForm();
         payNowBtn.disabled = !formValid;
@@ -205,7 +220,7 @@
         const durationSelect = document.getElementById('duration');
 
         payNowBtn.addEventListener('click', () => {
-            //
+            processPayment();
         });
 
 
@@ -214,6 +229,10 @@
             updateOrderSummary();
         });
     }
+
+    // Remove the form submit event listener - use AJAX instead
+                       
+    // Remove duplicate event listener - using only the jQuery version below
 
     //------- initialize menu --------//   
     $('.nav-menu').superfish({
@@ -292,3 +311,76 @@
     init();
 </script>
 
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}"></script>
+<script>
+    // Process Payment
+    function processPayment() {
+        const form = document.getElementById('bookingForm');
+        
+        // Disable button to prevent double submit
+        const payNowBtn = document.getElementById('payNowBtn');
+        payNowBtn.disabled = true;
+        payNowBtn.textContent = 'Memproses...';
+
+        // Clear previous addon inputs
+        const existingAddonInputs = form.querySelectorAll('input[name^="addons["]');
+        existingAddonInputs.forEach(input => input.remove());
+
+        // Add new addon inputs for addons with quantity > 0
+        for (const [id, addon] of Object.entries(addons)) {
+            if (addon.quantity > 0) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = `addons[${id}]`;
+                input.value = addon.quantity;
+                form.appendChild(input);
+            }
+        }
+
+        let formData = $("#bookingForm").serialize();
+        console.log("Sending payment request...");
+
+        $.ajax({
+            url: "/create-payment",
+            method: "POST",
+            data: formData,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                console.log("Payment response:", response);
+                if (response.snapToken) {
+                    snap.pay(response.snapToken, {
+                        onSuccess: function(result) {
+                            alert("Pembayaran sukses!");
+                            window.location.reload(); 
+                        },
+                        onPending: function(result) {
+                            alert("Menunggu pembayaran");
+                            window.location.reload();
+                        },
+                        onError: function(result) {
+                            alert("Pembayaran gagal");
+                            payNowBtn.disabled = false;
+                            payNowBtn.textContent = 'Bayar Sekarang';
+                        },
+                        onClose: function() {
+                            payNowBtn.disabled = false;
+                            payNowBtn.textContent = 'Bayar Sekarang';
+                        }
+                    });
+                } else {
+                    alert("Gagal mendapatkan token pembayaran");
+                    payNowBtn.disabled = false;
+                    payNowBtn.textContent = 'Bayar Sekarang';
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error:", xhr.responseText);
+                alert("Terjadi kesalahan saat memproses pembayaran");
+                payNowBtn.disabled = false;
+                payNowBtn.textContent = 'Bayar Sekarang';
+            }
+        });
+    }
+</script>

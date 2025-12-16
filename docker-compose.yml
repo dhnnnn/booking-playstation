@@ -1,20 +1,20 @@
-version: "3.9"
-
 services:
   app:
-    image: laravelsail/php82-composer
+    build:
+      context: .
+      network: host
+      dockerfile: Dockerfile
     container_name: laravel_app
+    network_mode: "host"
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
-    ports:
-      - "9000:8000"
-    command: >
-      bash -c "
-      composer install &&
-      php artisan key:generate &&
-      php artisan serve --host=0.0.0.0 --port=8000
-      "
+      - ./:/var/www/html
+    # ports:
+    #   - "9000:8000"
+    command: bash -c "composer install && php artisan key:generate && php artisan migrate --force || true && php artisan serve --host=0.0.0.0 --port=9000"
+    depends_on:
+      - mysql
 
   node:
     image: node:18
