@@ -1,13 +1,12 @@
-<div class="logo">
+            <div class="logo">
                 <img src="../../img/Logo.png" alt="MD Gaming Logo">
             </div>
             <nav>
                 <ul>
                     <li><a href="{{url('/home')}}">Dashboard</a></li>
-                    <li><a href="{{url('/bookings')}}">Booking</a></li>
+                    <li><a href="{{url('/bookings')}}" class="active">Booking</a></li>
                     <li><a href="{{url('/rooms')}}">Rooms</a></li>
-                    <li><a href="{{url('/addons')}}" class="active">Add ons</a></li>
-                    
+                    <li><a href="{{url('/addons')}}">Add ons</a></li>
                 </ul>
             </nav>
             <div class="user-actions">

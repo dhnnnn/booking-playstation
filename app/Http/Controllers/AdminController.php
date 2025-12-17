@@ -34,7 +34,33 @@ class AdminController extends Controller
 
             else if($usertype=='admin')
             {
-                return view('admin.index');
+                // Fetch dashboard statistics from database
+                $totalBookings = \App\Models\Booking::count();
+                $activeBookings = \App\Models\Booking::where('status', 'confirmed')
+                    ->whereDate('booking_date', today())
+                    ->count();
+                $availableRooms = \App\Models\RoomUnit::where('status', 'available')->count();
+                $todayBookings = \App\Models\Booking::whereDate('created_at', today())->count();
+                $totalRevenue = \App\Models\Booking::where('status', 'confirmed')->sum('dp_amount');
+                
+                // Get recent bookings with room and unit info
+                $recentBookings = \App\Models\Booking::with(['roomUnit', 'room'])
+                    ->orderBy('created_at', 'desc')
+                    ->take(5)
+                    ->get();
+                
+                // Get all room units for availability display
+                $roomUnits = \App\Models\RoomUnit::with('room')->get();
+                
+                return view('admin.index', compact(
+                    'totalBookings',
+                    'activeBookings',
+                    'availableRooms',
+                    'todayBookings',
+                    'totalRevenue',
+                    'recentBookings',
+                    'roomUnits'
+                ));
             }
 
         }
@@ -255,5 +281,63 @@ class AdminController extends Controller
         notify()->success('Add-ons berhasil diupdate!');
         return redirect('/addons');
     }
+
+    public function updateStock(Request $request, $id)
+    {
+        $request->validate([
+            'stock' => 'required|integer|min:0'
+        ]);
+
+        $addon = Addons::find($id);
+        
+        if (!$addon) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Addon not found'
+            ], 404);
+        }
+
+        $addon->stock = $request->stock;
+        $addon->save();
+
+        // Set session notification for page reload
+        notify()->success('Stock berhasil diupdate!');
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Stock berhasil diupdate!',
+            'new_stock' => $addon->stock
+        ]);
+    }
+
+    public function bookings()
+    {
+        $bookings = \App\Models\Booking::with(['roomUnit.room', 'bookingAddons.addon'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
+        return view('admin.bookings.index', compact('bookings'));
+    }
+
+    public function searchBookings(Request $request)
+    {
+        $search = $request->input('search');
+        
+        $bookings = \App\Models\Booking::with(['roomUnit.room', 'bookingAddons.addon'])
+            ->where(function($query) use ($search) {
+                $query->where('booking_code', 'LIKE', "%{$search}%")
+                    ->orWhere('full_name', 'LIKE', "%{$search}%")
+                    ->orWhere('email', 'LIKE', "%{$search}%")
+                    ->orWhere('phone_number', 'LIKE', "%{$search}%")
+                    ->orWhereHas('roomUnit.room', function($q) use ($search) {
+                        $q->where('room_title', 'LIKE', "%{$search}%");
+                    });
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
+        return response()->json(['bookings' => $bookings]);
+    }
+
 
 }

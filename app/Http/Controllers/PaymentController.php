@@ -54,14 +54,63 @@ class PaymentController extends Controller
         $totalDp = $request->input('total_dp');
         $addonsPrice = $request->input('addons_price');
 
+
+        // ===== VALIDATION: Check if unit is already booked =====
+        $existingBookings = Booking::where('unit_id', $unitId)
+            ->where('status', 'confirmed')
+            ->where('booking_date', $bookingDate)
+            ->get();
+
+        $hasConflict = false;
+
+        // Parse requested time
+        $requestedStart = strtotime($bookingDate . ' ' . $bookingTime);
+        $requestedEnd = $requestedStart + ($duration * 3600);
+
+        // Check each existing booking for overlap
+        foreach ($existingBookings as $booking) {
+            $existingStart = strtotime($bookingDate . ' ' . $booking->booking_time);
+            $existingEnd = $existingStart + ($booking->duration * 3600);
+
+            // Check for overlap: (StartA < EndB) and (EndA > StartB)
+            if ($requestedStart < $existingEnd && $requestedEnd > $existingStart) {
+                $hasConflict = true;
+                \Log::warning('Booking conflict detected', [
+                    'unit_id' => $unitId,
+                    'booking_date' => $bookingDate,
+                    'booking_time' => $bookingTime,
+                    'duration' => $duration,
+                    'existing_booking_id' => $booking->id,
+                    'existing_booking_time' => $booking->booking_time,
+                    'existing_duration' => $booking->duration
+                ]);
+                break;
+            }
+        }
+
+        if ($hasConflict) {
+            return response()->json([
+                'error' => 'Maaf, ruangan yang Anda pilih sudah tidak tersedia untuk waktu tersebut. Silakan pilih ruangan lain atau waktu yang berbeda.'
+            ], 422);
+        }
+
+
         // Process addons
         $bookingAddons = [];
         if ($request->has('addons')) {
             foreach ($request->input('addons') as $addonId => $quantity) {
                 if ($quantity > 0) {
-                    // Get addon details (assuming you have Addons model)
+                    // Get addon details
                     $addon = \App\Models\Addons::find($addonId);
                     if ($addon) {
+                        // Validate stock availability
+                        $availableStock = (int)$addon->stock;
+                        if ($availableStock < $quantity) {
+                            return response()->json([
+                                'error' => "Stock {$addon->addons_title} tidak mencukupi. Tersedia: {$availableStock}, Diminta: {$quantity}"
+                            ], 422);
+                        }
+
                         $bookingAddons[] = [
                             'addon_id' => $addonId,
                             'quantity' => $quantity,
@@ -72,6 +121,7 @@ class PaymentController extends Controller
                 }
             }
         }
+
 
         // Calculate prices
         $roomPrice = $totalHarga - $addonsPrice;
@@ -125,7 +175,10 @@ class PaymentController extends Controller
             \Log::info('Attempting to get Snap Token for order: ' . $transaction_details['order_id']);
             $snapToken = Snap::getSnapToken($transaction);
             \Log::info('Snap Token retrieved success: ' . $snapToken);
-            return response()->json(['snapToken' => $snapToken]);
+            return response()->json([
+                'snapToken' => $snapToken,
+                'bookingId' => $booking->id
+            ]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to create payment token: ' . $e->getMessage()], 500);
         }
@@ -208,6 +261,8 @@ class PaymentController extends Controller
 
     protected function updateBookingStatus(Booking $booking, $status, $notif)
     {
+        $oldStatus = $booking->status;
+
         $booking->update([
             'status' => $status,
             'transaction_id' => $notif->transaction_id,
@@ -217,9 +272,74 @@ class PaymentController extends Controller
         \Log::info('Booking status updated', [
             'booking_id' => $booking->id,
             'booking_code' => $booking->booking_code,
-            'status' => $status,
+            'old_status' => $oldStatus,
+            'new_status' => $status,
             'transaction_id' => $notif->transaction_id,
             'payment_type' => $notif->payment_type
         ]);
+
+        // Stock management
+        if ($status === 'confirmed' && $oldStatus !== 'confirmed') {
+            $this->deductAddonStock($booking);
+        } elseif ($status === 'cancelled' && $oldStatus === 'confirmed') {
+            $this->restoreAddonStock($booking);
+        }
+    }
+
+    protected function deductAddonStock(Booking $booking)
+    {
+        $bookingAddons = BookingAddon::where('booking_id', $booking->id)->get();
+        
+        foreach ($bookingAddons as $bookingAddon) {
+            $addon = \App\Models\Addons::find($bookingAddon->addon_id);
+            if ($addon) {
+                $oldStock = (int)$addon->stock;
+                $newStock = max(0, $oldStock - $bookingAddon->quantity);
+                $addon->update(['stock' => (string)$newStock]);
+                
+                \Log::info('Addon stock deducted', [
+                    'booking_id' => $booking->id,
+                    'addon_id' => $addon->id,
+                    'addon_title' => $addon->addons_title,
+                    'quantity_deducted' => $bookingAddon->quantity,
+                    'old_stock' => $oldStock,
+                    'new_stock' => $newStock
+                ]);
+            }
+        }
+    }
+
+    protected function restoreAddonStock(Booking $booking)
+    {
+        $bookingAddons = BookingAddon::where('booking_id', $booking->id)->get();
+        
+        foreach ($bookingAddons as $bookingAddon) {
+            $addon = \App\Models\Addons::find($bookingAddon->addon_id);
+            if ($addon) {
+                $oldStock = (int)$addon->stock;
+                $newStock = $oldStock + $bookingAddon->quantity;
+                $addon->update(['stock' => (string)$newStock]);
+                
+                \Log::info('Addon stock restored', [
+                    'booking_id' => $booking->id,
+                    'addon_id' => $addon->id,
+                    'addon_title' => $addon->addons_title,
+                    'quantity_restored' => $bookingAddon->quantity,
+                    'old_stock' => $oldStock,
+                    'new_stock' => $newStock
+                ]);
+            }
+        }
+    }    public function showInvoice($bookingId)
+    {
+        $booking = Booking::with(['roomUnit.room', 'bookingAddons.addon'])
+            ->findOrFail($bookingId);
+        
+        // Only show invoice for confirmed bookings
+        if ($booking->status !== 'confirmed') {
+            abort(403, 'Invoice hanya tersedia untuk booking yang sudah confirmed');
+        }
+        
+        return view('invoice.show', compact('booking'));
     }
 }

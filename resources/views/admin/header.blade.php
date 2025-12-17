@@ -4,7 +4,7 @@
 <nav>
     <ul>
         <li><a href="{{url('/home')}}" class="active">Dashboard</a></li>
-        <li><a href="#">Booking</a></li>
+        <li><a href="{{url('/bookings')}}">Booking</a></li>
         <li><a href="{{url('/rooms')}}">Rooms</a></li>
         <li><a href="{{url('/addons')}}">Add ons</a></li>
     </ul>

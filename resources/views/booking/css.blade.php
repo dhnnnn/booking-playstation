@@ -1,6 +1,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>MD Gaming | Rental Playstation </title>
+
 
     <link rel="icon" href="{{ asset('img/favicon.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('vendors/bootstrap/bootstrap.min.css') }}">
@@ -16,7 +18,11 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-
+    <!-- jQuery UI CSS for Datepicker -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    
+    <!-- ClockPicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/jquery-clockpicker.min.css">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
@@ -736,6 +742,13 @@
             margin-bottom: 10px;
         }
 
+        .addon-stock {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+
         .quantity-controls {
             display: flex;
             align-items: center;
@@ -1298,4 +1311,340 @@
         text-align: center !important;
     }
 }
+
+    /* ===== JQUERY UI DATEPICKER - IMPROVED DARK THEME ===== */
+    .ui-datepicker,
+    .ui-widget.ui-widget-content.ui-datepicker {
+        background: rgb(12, 14, 20) !important;
+        border: 2px solid rgba(6, 182, 212, 0.5) !important;
+        border-radius: 12px !important;
+        padding: 1rem !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 40px rgba(6, 182, 212, 0.4) !important;
+        font-family: inherit !important;
+        z-index: 99999 !important;
+        width: auto !important;
+    }
+
+    .ui-datepicker .ui-datepicker-header {
+        background: rgba(6, 182, 212, 0.15) !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 0.75rem 1rem !important;
+        margin-bottom: 0.75rem !important;
+        position: relative !important;
+    }
+
+    .ui-datepicker .ui-datepicker-title {
+        color: rgb(248, 250, 252) !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        text-align: center !important;
+        line-height: 2rem !important;
+    }
+
+    .ui-datepicker .ui-datepicker-prev,
+    .ui-datepicker .ui-datepicker-next {
+        cursor: pointer !important;
+        width: 2rem !important;
+        height: 2rem !important;
+        border-radius: 6px !important;
+        position: absolute !important;
+        top: 0.75rem !important;
+        background: rgba(6, 182, 212, 0.1) !important;
+        border: 1px solid rgba(6, 182, 212, 0.3) !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .ui-datepicker .ui-datepicker-prev {
+        left: 0.5rem !important;
+    }
+
+    .ui-datepicker .ui-datepicker-next {
+        right: 0.5rem !important;
+    }
+
+    .ui-datepicker .ui-datepicker-prev span,
+    .ui-datepicker .ui-datepicker-next span {
+        display: block !important;
+        position: absolute !important;
+        left: 50% !important;
+        top: 50% !important;
+        margin-left: -8px !important;
+        margin-top: -8px !important;
+    }
+
+    .ui-datepicker .ui-datepicker-prev:hover,
+    .ui-datepicker .ui-datepicker-next:hover {
+        background: rgba(6, 182, 212, 0.3) !important;
+        border-color: rgba(6, 182, 212, 0.6) !important;
+    }
+
+    .ui-datepicker table {
+        width: 100% !important;
+        margin: 0 !important;
+        border-collapse: separate !important;
+        border-spacing: 3px !important;
+    }
+
+    .ui-datepicker th {
+        color: rgb(6, 182, 212) !important;
+        font-weight: 700 !important;
+        font-size: 0.75rem !important;
+        padding: 0.5rem 0.25rem !important;
+        text-align: center !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+        background: none !important;
+        border: none !important;
+    }
+
+    .ui-datepicker td {
+        padding: 0 !important;
+        background: none !important;
+        border: none !important;
+    }
+
+    .ui-datepicker td a,
+    .ui-datepicker td span {
+        display: block !important;
+        text-align: center !important;
+        padding: 0.6rem 0.4rem !important;
+        border-radius: 8px !important;
+        color: rgb(203, 213, 225) !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid transparent !important;
+        transition: all 0.2s ease !important;
+        font-weight: 500 !important;
+        text-decoration: none !important;
+        cursor: pointer !important;
+    }
+
+    .ui-datepicker td a:hover {
+        background: rgba(6, 182, 212, 0.2) !important;
+        border-color: rgba(6, 182, 212, 0.5) !important;
+        color: rgb(6, 182, 212) !important;
+        transform: scale(1.05) !important;
+    }
+
+    .ui-datepicker td .ui-state-active,
+    .ui-datepicker td a.ui-state-active {
+        background: rgb(6, 182, 212) !important;
+        color: rgb(14, 17, 28) !important;
+        font-weight: 700 !important;
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.6) !important;
+        border-color: rgb(6, 182, 212) !important;
+    }
+
+    .ui-datepicker td .ui-state-disabled,
+    .ui-datepicker td span.ui-state-disabled {
+        opacity: 0.25 !important;
+        cursor: not-allowed !important;
+        color: rgb(100, 116, 139) !important;
+        background: rgba(100, 116, 139, 0.1) !important;
+    }
+
+    .ui-datepicker td .ui-state-highlight {
+        background: rgba(6, 182, 212, 0.15) !important;
+        color: rgb(6, 182, 212) !important;
+        border-color: rgba(6, 182, 212, 0.3) !important;
+    }
+
+    /* Remove default jQuery UI styling */
+    .ui-state-default,
+    .ui-widget-content .ui-state-default,
+    .ui-widget-header .ui-state-default {
+        border: 1px solid transparent !important;
+        background: none !important;
+        font-weight: normal !important;
+        color: inherit !important;
+    }
+
+    /* Fix for widget overlay */
+    .ui-widget-overlay {
+        background: rgba(0, 0, 0, 0.5) !important;
+        opacity: 1 !important;
+    }
+
+    /* Fix for icons */
+    .ui-icon {
+        background-image: none !important;
+    }
+
+    .ui-datepicker .ui-icon-circle-triangle-w:before {
+        content: "◄" !important;
+        color: rgb(6, 182, 212) !important;
+        font-size: 1rem !important;
+    }
+
+    .ui-datepicker .ui-icon-circle-triangle-e:before {
+        content: "►" !important;
+        color: rgb(6, 182, 212) !important;
+        font-size: 1rem !important;
+    }
+
+    /* ===== CLOCKPICKER - ANALOG CLOCK DARK THEME ===== */
+    .clockpicker-popover {
+        background: rgb(12, 14, 20) !important;
+        border: 2px solid rgba(6, 182, 212, 0.5) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), 0 0 40px rgba(6, 182, 212, 0.4) !important;
+        z-index: 99999 !important;
+    }
+
+    .clockpicker-popover .popover-title {
+        background: rgba(6, 182, 212, 0.15) !important;
+        color: rgb(248, 250, 252) !important;
+        border-bottom: 1px solid rgba(6, 182, 212, 0.3) !important;
+        border-radius: 10px 10px 0 0 !important;
+        font-weight: 700 !important;
+        padding: 1rem !important;
+    }
+
+    .clockpicker-popover .popover-content {
+        background: rgb(12, 14, 20) !important;
+        padding: 1.5rem !important;
+    }
+
+    .clockpicker-plate {
+        background: rgba(14, 17, 28, 0.8) !important;
+        border: 2px solid rgba(6, 182, 212, 0.3) !important;
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.2) inset !important;
+    }
+
+    .clockpicker-canvas,
+    .clockpicker-canvas-bearing,
+    .clockpicker-canvas-fg {
+        fill: rgb(6, 182, 212) !important;
+    }
+
+    .clockpicker-canvas-bg {
+        fill: rgba(6, 182, 212, 0.1) !important;
+    }
+
+    .clockpicker-canvas-bg-trans {
+        fill: rgba(6, 182, 212, 0.3) !important;
+    }
+
+    .clockpicker-tick {
+        color: rgb(203, 213, 225) !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .clockpicker-tick:hover {
+        background: rgba(6, 182, 212, 0.3) !important;
+        color: rgb(6, 182, 212) !important;
+        transform: scale(1.1) !important;
+    }
+
+    .clockpicker-tick.active,
+    .clockpicker-tick:hover {
+        background: rgb(6, 182, 212) !important;
+        color: rgb(14, 17, 28) !important;
+        font-weight: 700 !important;
+    }
+
+    .clockpicker-minutes .clockpicker-tick {
+        color: rgb(148, 163, 184) !important;
+        font-size: 0.85rem !important;
+    }
+
+    .clockpicker-button {
+        background: rgba(6, 182, 212, 0.15) !important;
+        color: rgb(6, 182, 212) !important;
+        border: 1px solid rgba(6, 182, 212, 0.4) !important;
+        border-radius: 8px !important;
+        padding: 0.5rem 1.5rem !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .clockpicker-button:hover {
+        background: rgb(6, 182, 212) !important;
+        color: rgb(14, 17, 28) !important;
+        border-color: rgb(6, 182, 212) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4) !important;
+    }
+
+    .clockpicker-button:focus {
+        outline: none !important;
+        box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.3) !important;
+    }
+
+    .clockpicker-display {
+        background: rgba(6, 182, 212, 0.1) !important;
+        color: rgb(248, 250, 252) !important;
+        border-radius: 8px !important;
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+        border: 1px solid rgba(6, 182, 212, 0.3) !important;
+    }
+
+    .clockpicker-display .clockpicker-display-column {
+        color: rgb(6, 182, 212) !important;
+        font-weight: 700 !important;
+        font-size: 2.5rem !important;
+        text-shadow: 0 0 10px rgba(6, 182, 212, 0.5) !important;
+    }
+
+    .clockpicker-display .clockpicker-span-hours,
+    .clockpicker-display .clockpicker-span-minutes {
+        color: rgb(6, 182, 212) !important;
+    }
+
+    .clockpicker-display .clockpicker-span-hours.text-primary,
+    .clockpicker-display .clockpicker-span-minutes.text-primary {
+        color: rgb(248, 250, 252) !important;
+        text-shadow: 0 0 15px rgba(6, 182, 212, 0.7) !important;
+    }
+
+    /* Arrow for popover */
+    .clockpicker-popover .arrow {
+        display: none !important;
+    }
+
+    /* Center dot on clock */
+    .clockpicker-canvas-bearing {
+        fill: rgb(6, 182, 212) !important;
+        stroke: rgb(14, 17, 28) !important;
+        stroke-width: 2 !important;
+    }
+
+    /* Clock hand */
+    .clockpicker-canvas-fg {
+        stroke: rgb(6, 182, 212) !important;
+        fill: rgb(6, 182, 212) !important;
+    }
+
+    .clockpicker-canvas-line {
+        stroke: rgb(6, 182, 212) !important;
+        stroke-width: 2 !important;
+    }
+
+    /* Selected time bg circle */
+    .clockpicker-canvas-bg {
+        fill: rgba(6, 182, 212, 0.2) !important;
+    }
+
+    /* Positioning */
+    .clockpicker-align-left.clockpicker-popover {
+        left: 0 !important;
+    }
+
+    .clockpicker-align-center.clockpicker-popover {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+
+    /* Make popover appear centered */
+    .clockpicker-popover.bottom {
+        margin-top: 10px !important;
+    }
+
+    .popover.clockpicker-popover {
+        width: auto !important;
+        max-width: 300px !important;
+    }
     </style>
+

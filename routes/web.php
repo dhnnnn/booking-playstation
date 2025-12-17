@@ -29,11 +29,15 @@ Route::get('/home', [AdminController::class, 'index'])->name('home');
 
     //menage addons
     Route::get('/addons', [AdminController::class, 'add_ons'])->name('add_ons');
+    Route::get('/bookings', [AdminController::class, 'bookings'])->name('bookings');
+    Route::get('/bookings/search', [AdminController::class, 'searchBookings'])->name('bookings.search');
     Route::post('add_addons', [AdminController::class, 'add_addons']);
     Route::get('/addons/create', [AdminController::class, 'create_addons']);
     Route::get('/addons/delete/{id}', [AdminController::class, 'delete_addons']);
     Route::get('/addons/update/{id}', [AdminController::class, 'addons_update']);
     Route::post('/edit_addons/{id}', [AdminController::class, 'edit_addons']);
+    Route::post('/addons/update-stock/{id}', [AdminController::class, 'updateStock']);
+
 
 //});
 
@@ -46,12 +50,15 @@ Route::get('/room/detail/{id}', [SroomController::class, 'detail_room']);
 
 Route::get('/room/booking/{id}', [BookingController::class, 'booking']);
 Route::post('/room/booking/{id}', [BookingController::class, 'booking']);
+Route::post('/check-availability', [BookingController::class, 'checkAvailability']);
+
 
 //Payment midtrans
 Route::post('/create-payment', [PaymentController::class, 'createPayment']);
+Route::post('/midtrans/callback', [PaymentController::class, 'handleCallback']); // callback
 
-Route::post('/midtrans/notification', [PaymentController::class, 'handleCallback']); // callback
-
+// Invoice
+Route::get('/invoice/{booking_id}', [PaymentController::class, 'showInvoice'])->name('invoice.show');
 
 
 Route::get('/about', function() {

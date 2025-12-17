@@ -230,6 +230,30 @@ main .dashboard-header h2 {
 .status.active { background-color: var(--primary-yellow); color: var(--bg-dark); }
 .status.pending { background-color: var(--status-red); }
 
+/* Status badges for bookings */
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.status-badge.status-pending {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.status-badge.status-confirmed {
+    background-color: var(--status-green);
+}
+
+.status-badge.status-cancelled {
+    background-color: var(--status-red);
+}
+
 .view-all-btn {
     width: 100%;
     margin-top: 20px;
@@ -303,10 +327,21 @@ main .dashboard-header h2 {
     font-size: 1rem;
     cursor: pointer;
     transition: transform 0.2s;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-btn a {
+    text-decoration: none;
+    
 }
 
 .action-btn:hover {
     transform: translateY(-2px);
+    background-color: #e0a82e;
 }
 
 .image-placeholder {
@@ -368,7 +403,7 @@ button {
 button {
   background-color: #28a745;
   color: #fff;
-  margin-bottom: 15px;
+
 }
 
 button:hover {
@@ -503,7 +538,78 @@ button i {
 .toggle-wrapper input[type="checkbox"]:checked + .toggle .toggle-ball {
   transform: translateX(27px);
 }
+        .stock-edit-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
+        .stock-display {
+            font-weight: 600;
+            min-width: 30px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px 6px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+        }
+
+        .icon-btn:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-btn i {
+            font-size: 14px;
+        }
+
+        .icon-btn.save-btn {
+            color: #28a745;
+        }
+
+        .icon-btn.save-btn:hover {
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .icon-btn.cancel-btn {
+            color: #dc3545;
+        }
+
+        .icon-btn.cancel-btn:hover {
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .stock-input {
+            width: 70px;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+            background-color: #fff;
+            font-weight: 600;
+        }
+
+        .stock-input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+        }
+
+        .stock-edit-form {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
 /* Label teks di samping */
 .toggle-text {
   font-weight: 600;

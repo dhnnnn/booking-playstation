@@ -1,4 +1,53 @@
 <script src="{{ asset('vendors/jquery/jquery-3.2.1.min.js') }}"></script>
+
+<!-- jQuery UI for Datepicker -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+<!-- ClockPicker for Time Selection -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/jquery-clockpicker.min.js"></script>
+
+<!-- Initialize Datepicker and ClockPicker -->
+<script>
+    $(document).ready(function() {
+        console.log('Initializing datepicker and clockpicker...');
+        
+        // Initialize Datepicker for booking date
+        $('#bookingDate').datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: 0,
+            maxDate: '+3M',
+            showAnim: 'fadeIn',
+            changeMonth: false,
+            changeYear: false,
+            dayNamesMin: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+            monthNames: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+                         'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+            monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 
+                             'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
+            onSelect: function(dateText) {
+                $(this).trigger('change');
+                console.log('Date selected:', dateText);
+            }
+        });
+        console.log('Datepicker initialized');
+
+        // Initialize ClockPicker for booking time
+        $('#bookingTime').clockpicker({
+            placement: 'bottom',
+            align: 'center',
+            donetext: 'Pilih',
+            autoclose: true,
+            twelvehour: false,
+            vibrate: false,
+            afterDone: function() {
+                $('#bookingTime').trigger('change');
+                console.log('Time selected:', $('#bookingTime').val());
+            }
+        });
+        console.log('ClockPicker initialized');
+    });
+</script>
+
 <script src="{{ asset('vendors/jquery.ajaxchimp.min.js') }}"></script>
 <script src="{{ asset('vendors/bootstrap/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('vendors/magnefic-popup/jquery.magnific-popup.min.js') }}"></script>
@@ -24,10 +73,12 @@
                 id: "{{ $addon->id }}",
                 name: "{{ $addon->addons_title }}",
                 price: {{ $addon->price }},
+                stock: {{ $addon->stock ?? 0 }},
                 quantity: 0
             },
         @endforeach
     };
+
 
 
     let selectedRoom = null;
@@ -113,14 +164,18 @@
     function changeQuantity(addonId, change) {     
         const currentQty = addons[addonId].quantity;
         const newQty = currentQty + change;
+        const availableStock = addons[addonId].stock;
 
-        if (newQty >= 0) {
+        if (newQty >= 0 && newQty <= availableStock) {
             addons[addonId].quantity = newQty;
             document.getElementById(`qty-${addonId}`).textContent = newQty;
 
             updateOrderSummary();
+        } else if (newQty > availableStock) {
+            alert(`Stock tidak mencukupi. Stock tersedia: ${availableStock}`);
         }
     }
+
 
 
     // Update Order Summary
@@ -214,6 +269,57 @@
         return 'Rp ' + amount.toLocaleString('id-ID');
     }
 
+    // Check Room Availability
+    function checkRoomAvailability() {
+        const bookingDate = $('#bookingDate').val();
+        const bookingTime = $('#bookingTime').val();
+        const duration = $('#duration').val();
+        const roomId = '{{ $room->id }}';
+
+        // Only check if all fields are filled
+        if (!bookingDate || !bookingTime || !duration) {
+            return;
+        }
+
+        // Show loading state
+        const roomsGrid = $('#roomsGrid');
+        roomsGrid.html('<div style="text-align: center; padding: 20px; color: #666;">Memeriksa ketersediaan...</div>');
+
+        // Clear selected room
+        selectedRoom = null;
+        updateOrderSummary();
+
+        // Send AJAX request
+        $.ajax({
+            url: '/check-availability',
+            method: 'POST',
+            data: {
+                booking_date: bookingDate,
+                booking_time: bookingTime,
+                duration: duration,
+                room_id: roomId,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                if (response.success && response.units) {
+                    // Update rooms data
+                    rooms.length = 0; // Clear array
+                    response.units.forEach(unit => {
+                        rooms.push(unit);
+                    });
+                    
+                    // Re-render rooms
+                    renderRooms();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error checking availability:', error);
+                roomsGrid.html('<div style="text-align: center; padding: 20px; color: #ff4444;">Gagal memeriksa ketersediaan. Silakan coba lagi.</div>');
+            }
+        });
+    }
+
+
     // Event Listeners
     function attachEventListeners() {
         const payNowBtn = document.getElementById('payNowBtn');
@@ -228,7 +334,13 @@
             selectedDuration = e.target.value;
             updateOrderSummary();
         });
+
+        // Add jQuery event listeners for availability checking
+        $('#bookingDate, #bookingTime, #duration').on('change', function() {
+            checkRoomAvailability();
+        });
     }
+
 
     // Remove the form submit event listener - use AJAX instead
                        
@@ -352,8 +464,9 @@
                 if (response.snapToken) {
                     snap.pay(response.snapToken, {
                         onSuccess: function(result) {
-                            alert("Pembayaran sukses!");
-                            window.location.reload(); 
+                            console.log("Payment success:", result);
+                            // Redirect to invoice page
+                            window.location.href = '/invoice/' + response.bookingId;
                         },
                         onPending: function(result) {
                             alert("Menunggu pembayaran");
@@ -377,9 +490,22 @@
             },
             error: function(xhr, status, error) {
                 console.error("AJAX Error:", xhr.responseText);
-                alert("Terjadi kesalahan saat memproses pembayaran");
+                
+                let errorMessage = "Terjadi kesalahan saat memproses pembayaran";
+                
+                // Check if there's a specific error message from the server
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    errorMessage = xhr.responseJSON.error;
+                }
+                
+                alert(errorMessage);
                 payNowBtn.disabled = false;
                 payNowBtn.textContent = 'Bayar Sekarang';
+                
+                // If it's a conflict error, refresh availability
+                if (xhr.status === 422) {
+                    checkRoomAvailability();
+                }
             }
         });
     }

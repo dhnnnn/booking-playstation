@@ -22,12 +22,12 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="bookingDate" class="form-label">Tanggal Booking</label>
-                    <input type="date" id="bookingDate" name="bookingDate" class="form-input" required>
+                    <input type="text" id="bookingDate" name="bookingDate" class="form-input" placeholder="Pilih tanggal" required readonly>
                 </div>
                 
                 <div class="form-group">
                     <label for="bookingTime" class="form-label">Jam Booking</label>
-                    <input type="time" id="bookingTime" name="bookingTime" class="form-input" required>
+                    <input type="text" id="bookingTime" name="bookingTime" class="form-input" placeholder="Pilih jam" required readonly>
                 </div>
             </div>
                 

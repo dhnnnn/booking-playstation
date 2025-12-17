@@ -45,4 +45,20 @@ class Booking extends Model
             }
         });
     }
+
+    // Relationships
+    public function roomUnit()
+    {
+        return $this->belongsTo(RoomUnit::class, 'unit_id');
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class, 'room_id');
+    }
+
+    public function bookingAddons()
+    {
+        return $this->hasMany(BookingAddon::class, 'booking_id');
+    }
 }

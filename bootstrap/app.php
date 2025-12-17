@@ -19,7 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         
         // Exclude Midtrans webhook from CSRF verification
         $middleware->validateCsrfTokens(except: [
-            'midtrans/notification',
+            'midtrans/callback',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

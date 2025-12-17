@@ -7,6 +7,7 @@
                 <div class="addon-info">
                     <div class="addon-name">{{ $addon->addons_title }}</div>
                     <div class="addon-price">Rp {{ number_format($addon->price, 0, ',', '.') }}</div>
+                    <div class="addon-stock">Stock: {{ $addon->stock ?? 0 }}</div>
                     <div class="quantity-controls">
                         <button class="quantity-btn" type="button" onclick="changeQuantity('{{ $addon->id }}', -1)">-</button>
                         <span class="quantity-display" id="qty-{{ $addon->id }}">0</span>
@@ -14,6 +15,7 @@
                     </div>
                 </div>
             </div>
+
         @endforeach
     </div>
 </div>
