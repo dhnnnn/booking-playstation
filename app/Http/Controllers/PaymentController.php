@@ -281,8 +281,24 @@ class PaymentController extends Controller
         // Stock management
         if ($status === 'confirmed' && $oldStatus !== 'confirmed') {
             $this->deductAddonStock($booking);
+            
+            // Send WhatsApp notification
+            $this->sendWhatsAppNotification($booking);
         } elseif ($status === 'cancelled' && $oldStatus === 'confirmed') {
             $this->restoreAddonStock($booking);
+        }
+    }
+
+    protected function sendWhatsAppNotification(Booking $booking)
+    {
+        try {
+            $whatsappService = new \App\Services\WhatsAppService();
+            $whatsappService->sendBookingConfirmation($booking);
+        } catch (\Exception $e) {
+            Log::error('WhatsApp notification error', [
+                'booking_id' => $booking->id,
+                'error' => $e->getMessage()
+            ]);
         }
     }
 
