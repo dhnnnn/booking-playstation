@@ -31,21 +31,41 @@ MD Gaming adalah sistem booking online yang mempermudah pelanggan untuk melakuka
 ## 🚀 Fitur Utama
 
 1. Booking Real-Time
-   - Pengguna dapat memilih tanggal, jam, durasi, dan unit yang tersedia.
-   - Status unit otomatis berubah menjadi Tersedia / Tidak Tersedia sesuai booking yang dibuat.
+    - Pengguna dapat memilih tanggal, jam, durasi, dan unit yang tersedia.
+    - Sistem secara otomatis menampilkan ketersediaan unit secara real-time.
+    - Status unit akan berubah sesuai dengan jadwal booking yang dibuat.
 
-2. Manajemen Unit
-   - Setiap unit memiliki status yang akan diperbarui secara otomatis.
-   - Admin bisa menambah, mengedit, atau menghapus data unit.
+2. Pembayaran Online (Midtrans)
 
-3. Tampilan UI Modern
-   - Desain clean, gelap, dan modern.
-   - Menggunakan kombinasi HTML, CSS, dan JavaScript.
-   - Komponen responsif untuk mobile dan desktop.
+    - Sistem terintegrasi dengan Midtrans Payment Gateway.
+    - Mendukung berbagai metode pembayaran (Transfer Bank, E-Wallet, dll).
+    - Status booking akan otomatis tervalidasi setelah pembayaran berhasil.
+    - Callback Midtrans digunakan untuk memastikan status transaksi secara aman.
 
-4. Sistem Validasi
-   - Validasi input saat form booking di-submit.
-   - Mencegah double booking pada jam dan tanggal yang sama.
+3. Invoice Otomatis via WhatsApp
+
+    - Setelah pembayaran berhasil dan tervalidasi, sistem akan:
+    - Meng-generate invoice booking
+    - Mengirimkan invoice secara otomatis ke WhatsApp pengguna
+    - Integrasi menggunakan Fonte WhatsApp Gateway (fonte.id).
+
+4. Manajemen Unit
+
+    - Setiap unit memiliki status dinamis berdasarkan jadwal booking.
+    - Admin dapat menambah, mengedit, dan menghapus data unit.
+    - Status unit akan diperbarui otomatis setelah pembayaran berhasil.
+
+5. Sistem Validasi Booking
+
+    - Validasi input pada form booking.
+    - Mencegah double booking pada unit, tanggal, dan jam yang sama.
+    - Booking hanya dikonfirmasi setelah pembayaran berhasil.
+
+6. Tampilan UI Modern
+
+    - Desain clean, gelap, dan modern.
+    - Menggunakan HTML, CSS, dan JavaScript.
+    - Komponen responsif untuk mobile dan desktop.
 
 ## 🛠️ Teknologi yang Digunakan
 
@@ -54,51 +74,74 @@ MD Gaming adalah sistem booking online yang mempermudah pelanggan untuk melakuka
 - Blade Template — View system
 
 - MySQL — Database untuk booking dan status unit
+  
+- Midtrans — Payment Gateway
+
+- Fonte WhatsApp Gateway — Pengiriman invoice otomatis via WhatsApp
 
 - CSS Custom — UI theme dark modern
 
 - JavaScript — Interaksi (durasi, waktu, status)
 
 ## 📘 Cara Menggunakan
-1. Clone Repository
-```bash
+1. Prasyarat
+> Aplikasi ini **wajib dijalankan** menggunakan Docker untuk memastikan environment konsisten (PHP, MySQL, Node, dan service pendukung).
+- Docker
+- Docker Compose
+- Git
+
+2. Clone Repository
+```
 git clone https://github.com/dhnnnn/booking-playstation.git
 cd booking-playstation
 ```
-2. Install Dependencies
-```bash
-composer install
-npm install
-```
-3. Setup Environment
 
-```bash
+3. Konfigurasi Environment
+```
 cp .env.example .env
-php artisan key:generate
 ```
-Sesuaikan database pada .env:
 
-```makefile
+Atur database agar sesuai dengan service Docker:
+```
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
 DB_DATABASE=booking_db
 DB_USERNAME=root
-DB_PASSWORD=
+DB_PASSWORD=root
 ```
 
-4. Migrate Database
-```bash
-php artisan migrate
+Tambahkan konfigurasi Midtrans dan Fonte:
+```
+MIDTRANS_SERVER_KEY=your_midtrans_server_key
+MIDTRANS_CLIENT_KEY=your_midtrans_client_key
+MIDTRANS_IS_PRODUCTION=false
+
+FONTE_API_KEY=your_fonte_api_key
+FONTE_DEVICE=your_device_name
+FONTE_BASE_URL=https://api.fonte.id
 ```
 
-5. Jalankan Server
-```bash
-php artisan serve
+4. Jalankan Docker Container
 ```
+docker compose up -d --build
+```
+Pastikan container berjalan:
+```
+docker ps
+```
+5. Akses Aplikasi
+```
+http://localhost:8000
+```
+
 ## 🧪 Cara Kerja Booking
 
-User memilih tanggal dan jam.
-
-1. Sistem mengecek apakah unit tersebut sudah dibooking atau masih tersedia.
-
-2. Jika tersedia → sistem menyimpan booking dan status unit berubah menjadi Tidak Tersedia di jam tersebut.
-
-3. Jika tidak tersedia → user akan mendapat pesan bahwa unit sedang dipakai.
+1. User melakukan booking melalui aplikasi Laravel di container.
+2. Sistem memvalidasi ketersediaan unit dari database MySQL (container).
+3. User diarahkan ke pembayaran Midtrans.
+4. Midtrans mengirim callback ke endpoint Laravel.
+5. Setelah pembayaran berhasil:
+    - Status booking dikonfirmasi
+    - Invoice dibuat otomatis
+    - Invoice dikirim ke WhatsApp via Fonte Gateway
