@@ -1,4 +1,30 @@
-# MD Gaming – Playstation Online Booking System
+<p align="center">
+  <img width="100%" src="public\images\readme\tumbnail.png" align="center" />
+  <h2 align="center" >MD Gaming – Playstation Online Booking System</h2>
+</p>
+
+
+<p align="center">
+  <a href="https://github.com/dhnnnn/Forest-Defender/graphs/contributors">
+      <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/dhnnnn/booking-playstation?style=flat" />
+    </a>
+  
+  <a href="https://github.com/dhnnnn/Forest-Defender/watchers">
+  <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/dhnnnn/booking-playstation?style=flat&color=800080" />
+</a>
+
+  <a href="https://github.com/dhnnnn/Forest-Defender/pulls">
+      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/dhnnnn/booking-playstation?color=0088ff" />
+    </a>
+<br/>
+<a href="https://github.com/dhnnnn/Forest-Defender/network/members">
+  <img alt="GitHub forks" src="https://img.shields.io/github/forks/dhnnnn/booking-playstation?style=flat&color=4caf50"/>
+</a>
+
+<a href="https://github.com/dhnnnn/Forest-Defender/stargazers">
+  <img alt="GitHub stars" src="https://img.shields.io/github/stars/dhnnnn/booking-playstation?style=flat&color=ffc107" />
+</a>
+</p>
 
 MD Gaming adalah sistem booking online yang mempermudah pelanggan untuk melakukan pemesanan Unit gaming secara cepat dan real-time. Sistem ini menggantikan proses booking manual, sehingga lebih efisien, transparan, dan mudah digunakan baik oleh admin maupun pelanggan.
 
