@@ -629,7 +629,6 @@
             display: block;
             font-size: 1rem;
             color: #ffffff; 
-            background-color: rgb(12, 14, 20); 
             margin-bottom: 0.5rem;
             font-family: inherit;
             -webkit-appearance: none;

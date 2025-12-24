@@ -1,49 +1,42 @@
+version: "3.9"
+
 services:
   app:
     build:
       context: .
-      network: host
       dockerfile: Dockerfile
     container_name: laravel_app
-    network_mode: "host"
     working_dir: /var/www/html
     volumes:
-      - ./:/var/www/html
-      - ./:/var/www/html
-    # ports:
-    #   - "9000:8000"
-    command: bash -c "composer install && php artisan key:generate && php artisan migrate --force || true && php artisan serve --host=0.0.0.0 --port=9000"
+      - .:/var/www/html
+    ports:
+      - "8000:8000"
+    command: >
+      bash -c "
+      composer install &&
+      php artisan key:generate &&
+      php artisan migrate --force || true &&
+      php artisan serve --host=0.0.0.0 --port=8000
+      "
     depends_on:
       - mysql
-
-  node:
-    image: node:18
-    container_name: laravel_node
-    working_dir: /var/www/html
-    volumes:
-      - ./:/var/www/html
-    command: bash -c "npm install && npm run dev"
-    depends_on:
-      - app
 
   mysql:
     image: mysql:8.0
     container_name: laravel_mysql
-    restart: always
+    restart: unless-stopped
     environment:
-      MYSQL_DATABASE: laravel
+      MYSQL_DATABASE: md_gaming
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: laravel
-      MYSQL_PASSWORD: laravel
-    volumes:
-      - mysqldata:/var/lib/mysql
+  
     ports:
       - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: laravel_phpmyadmin
-    restart: unless-stopped
     environment:
       PMA_HOST: laravel_mysql
       PMA_USER: root
