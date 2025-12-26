@@ -5,23 +5,23 @@
 
 
 <p align="center">
-  <a href="https://github.com/dhnnnn/Forest-Defender/graphs/contributors">
+  <a href="https://github.com/dhnnnn/booking-playstation/graphs/contributors">
       <img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/dhnnnn/booking-playstation?style=flat" />
     </a>
   
-  <a href="https://github.com/dhnnnn/Forest-Defender/watchers">
+  <a href="https://github.com/dhnnnn/booking-playstation/watchers">
   <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/dhnnnn/booking-playstation?style=flat&color=800080" />
 </a>
 
-  <a href="https://github.com/dhnnnn/Forest-Defender/pulls">
+  <a href="https://github.com/dhnnnn/booking-playstation/pulls">
       <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/dhnnnn/booking-playstation?color=0088ff" />
     </a>
 <br/>
-<a href="https://github.com/dhnnnn/Forest-Defender/network/members">
+<a href="https://github.com/dhnnnn/booking-playstation/network/members">
   <img alt="GitHub forks" src="https://img.shields.io/github/forks/dhnnnn/booking-playstation?style=flat&color=4caf50"/>
 </a>
 
-<a href="https://github.com/dhnnnn/Forest-Defender/stargazers">
+<a href="https://github.com/dhnnnn/booking-playstation/stargazers">
   <img alt="GitHub stars" src="https://img.shields.io/github/stars/dhnnnn/booking-playstation?style=flat&color=ffc107" />
 </a>
 </p>
