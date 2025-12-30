@@ -9,10 +9,6 @@ services:
     working_dir: /var/www/html
     volumes:
       - .:/var/www/html
-<<<<<<< HEAD
-    ports:
-      - "8000:8000"
-=======
     environment:
       - DB_HOST=mysql
       - DB_DATABASE=md_gaming
@@ -20,7 +16,6 @@ services:
       - DB_PASSWORD=root
     networks:
       - laravel-network
->>>>>>> staging
     depends_on:
       - mysql
 
@@ -53,9 +48,4 @@ networks:
     driver: bridge
 
 volumes:
-<<<<<<< HEAD
   mysqldata:
-    driver: local
-=======
-  mysqldata:
->>>>>>> staging
