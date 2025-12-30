@@ -9,15 +9,13 @@ services:
     working_dir: /var/www/html
     volumes:
       - .:/var/www/html
-    ports:
-      - "8000:8000"
-    command: >
-      bash -c "
-      composer install &&
-      php artisan key:generate &&
-      php artisan migrate --force || true &&
-      php artisan serve --host=0.0.0.0 --port=8000
-      "
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=md_gaming
+      - DB_USERNAME=root
+      - DB_PASSWORD=root
+    networks:
+      - laravel-network
     depends_on:
       - mysql
 
@@ -28,23 +26,26 @@ services:
     environment:
       MYSQL_DATABASE: md_gaming
       MYSQL_ROOT_PASSWORD: root
-  
-    ports:
-      - "3306:3306"
     volumes:
       - mysqldata:/var/lib/mysql
+    networks:
+      - laravel-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: laravel_phpmyadmin
     environment:
-      PMA_HOST: laravel_mysql
+      PMA_HOST: mysql
       PMA_USER: root
       PMA_PASSWORD: root
-    ports:
-      - "8085:80"
     depends_on:
       - mysql
+    networks:
+      - laravel-network
+
+networks:
+  laravel-network:
+    driver: bridge
 
 volumes:
   mysqldata:
