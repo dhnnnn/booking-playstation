@@ -1,7 +1,5 @@
 services:
   app:
-    volumes:
-      - .:/var/www/html
     ports:
       - "8000:8000"
     command: >

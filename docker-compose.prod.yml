@@ -1,18 +1,24 @@
 services:
   app:
-    network_mode: "host"
+    ports:
+      - "127.0.0.1:8000:8000"
     restart: always
     command: >
       bash -c "
       composer install --no-dev --optimize-autoloader &&
+      php artisan config:cache &&
+      php artisan route:cache &&
+      php artisan view:cache &&
       php artisan migrate --force &&
-      php artisan serve --host=127.0.0.1 --port=8000
+      php artisan serve --host=0.0.0.0 --port=8000
       "
 
   mysql:
-    network_mode: "host"
+    ports:
+      - "127.0.0.1:3306:3306"
     restart: always
 
   phpmyadmin:
-    network_mode: "host"
+    ports:
+      - "127.0.0.1:8085:80"
     restart: always
