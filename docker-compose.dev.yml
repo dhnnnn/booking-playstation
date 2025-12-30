@@ -1,0 +1,21 @@
+services:
+  app:
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:8000"
+    command: >
+      bash -c "
+      composer install &&
+      php artisan key:generate &&
+      php artisan migrate || true &&
+      php artisan serve --host=0.0.0.0 --port=8000
+      "
+
+  mysql:
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    ports:
+      - "8085:80"
